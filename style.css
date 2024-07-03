@@ -79,6 +79,7 @@
 }
 .map{
   height: 100%;
+  background-color: rgb(149, 207, 214);
 }
 
 .main-map.expand {
