@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/x-icon" href="https://openlayers.org/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Using OpenLayers with Vite</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./table2.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        .category {
+            overflow-y: auto;
+            max-height: 400px;
+        }
+
+        .category div:hover {
+            background-color: rgb(218, 210, 210);
+        }
+
+        .heading img {
+            width: 80px;
+            height: 80px;
+            margin: 18px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .expanded {
+            width: 100%;
+            height: 100%;
+        }
+
+        .table-container {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background-color: white;
+            border: 1px solid black;
+            z-index: 2;
+            max-height: 200px;
+            overflow-y: auto;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div class="sidebar">
+            <div class="heading">
+                <img src="./logo/logo1.jpg" alt="">
+                <div>
+                    <h1>Public Works Department</h1>
+                    <p>Government Of Uttar Pradesh</p>
+                </div>
+                <img src="./logo/logo2.jpg" alt="">
+            </div>
+            <div>
+                <div class="state-info" >State: distance in km</div>
+                <div class="last-updated" style="display: flex; justify-content: space-between;">
+                    <div>Last Updated On</div>
+                    <div id="date-time" style="display: flex; justify-content: space-between; gap: 5px; " >
+                      <div>date</div>
+                      <div>time</div>  
+                      <button><i class="fa-solid fa-arrows-rotate"></i></button>
+                    </div>
+                </div>
+                <div class="section-title">PWD ROADS
+                  
+                </div>
+                <div class="category">
+                    <div class="category-item" style="color: red;">RENEWAL</div>
+                    <div class="category-item" style="color: rgb(33, 233, 113);">WIDTH</div>
+                    <div class="category-item" style="color: rgb(5, 69, 206);">THICKNESS</div>
+                    <div class="category-item" style="color: rgb(242, 218, 63);">SURFACE TYPE</div>
+                    <div class="category-item" style="color: rgb(111, 22, 199);">DIVISION</div>
+                </div>
+                <div class="section-title">BRIDGES
+                  <i class="fa-solid fa-caret-up"></i>
+                </div>
+                <div class="section-title">PWD ROAD DIGITIZATION STATUS</div>
+            </div>
+        </div>
+        
+           
+            <!-- <a class="skiplink" href="#map"></a> -->
+            <div id="map" class="map" tabindex="0" style="display:flex; justify-content:space-between;"  >
+              <button id="toggle-sidebar" style="left: 0px; margin: 1px; height: 20px; width: 20px; padding: 3px; width: fit-content; position: sticky;
+              ">
+              <i class="fa-solid fa-caret-up"></i></button>
+              
+              <div class="icon-btn">
+                <button style="width: 30px; height: 30px; margin: 1px; padding: 3px; position: fixed; right: 50px; z-index: 1;">
+                  <i class="fa-solid fa-arrow-left"></i>
+                </button>
+                <button style="width: 30px; height: 30px; margin: 1px; padding: 3px; position: fixed; right: 10px; z-index: 1;">
+                  <i class="fa-solid fa-question"></i>
+                </button>
+            
+              </div>
+
+              
+            </div>
+             
+            <button id="show-table" class="btn">click me</button>
+            <div id="table-container" class="table-container">
+              <div style="display: flex; flex-direction: column; ">
+                <div style="  background-color: aquamarine;"></div>
+                <div class="tbl" style="width: 1520px;">
+         
+                      
+             <nav style="position: sticky;">
+                 <div class="navbar">
+                     <ul class="nav-left">
+                         <a href="#"  >Summary</a>
+                         <a href="#">zone</a>
+                         <a href="#">Circle</a>
+                         <a href="#">District</a>
+                         
+                     </ul>
+                     <ul class="nav-right">
+                         
+                        
+                         <a href="">Disclaimer</a>
+                         <!-- <a href=""  id="minimizeIcon" onclick="minimizeWindow()"><i class="fa-solid fa-minus"></i></a> -->
+                         <a href="" id="download"><i class="fa-solid fa-circle-down"></i></a>
+                         <a href="" id="restoreIcon"> <i class="fa-solid fa-minimize"></i></a>
+                         <a href="" id="close" onclick="closeWindow()">  <i class="fa-solid fa-xmark"></i></a>
+                        
+                       
+                         
+                     </ul>
+                 </div>
+                 <div></div>
+             </nav>
+             <table style="overflow-x:auto ; overflow-wrap:hidden;" >
+           <thead>
+             <tr class="heading">
+                 <th>Road Type</th>
+                 <th>Unique Roads (GIS)</th>
+         
+               <th>District wise Roads</th>
+               <th>Work Proposals</th>
+               <th>Total Stretches</th>
+               <th>Overdue for Renewal</th>
+               <th>Renewal Due in 0 yr (FY 24-25)</th>
+               <th>Road1</th>
+               <th>Road2</th>
+               <th>Road3</th>
+               <th>Road3</th>
+               <th>Road3</th>
+               <th>Road3</th>
+               <th>Road3</th>
+               <th>Road3</th>
+               <th>Road3</th>
+               <th>Road3</th>
+               <th>Road3</th>
+               <th>Road3</th>
+               <th>Road3</th>
+               <th>Road3</th>
+               <th>Road3</th>
+               <th>Road3</th>
+               <th>Road3</th>
+               <th>Road3</th>
+               <th>Road3</th>
+               <th>Road3</th>
+             </tr>
+             
+           </thead>
+           <tbody class="subcolomn"  >
+             <tr>
+               <td>Row 1, Col 1</td>
+               <td>Row 1, Col 2</td>
+               <td>Row 1, Col 3</td>
+               <td>Row 1, Col 4</td>
+               <td>Row 1, Col 5</td>
+               <td>Row 1, Col 6</td>
+               <td>Row 1, Col 7</td>
+               <td>Row 1, Col 8</td>
+               <td>Row 1, Col 9</td>
+               <td>Row 1, Col 10</td>
+               <td>Row 1, Col 11</td>
+               <td>Row 1, Col 12</td>
+               <td>Row 1, Col 13</td>
+               <td>Row 1, Col 14</td>
+               <td>Row 1, Col 15</td>
+             </tr>
+             <tr>
+               <td>Row 2, Col 1</td>
+               <td>Row 2, Col 2</td>
+               <td>Row 2, Col 3</td>
+               <td>Row 2, Col 4</td>
+               <td>Row 2, Col 5</td>
+               <td>Row 2, Col 6</td>
+               <td>Row 2, Col 7</td>
+               <td>Row 2, Col 8</td>
+               <td>Row 2, Col 9</td>
+               <td>Row 2, Col 10</td>
+               <td>Row 2, Col 11</td>
+               <td>Row 2, Col 12</td>
+               <td>Row 2, Col 13</td>
+               <td>Row 2, Col 14</td>
+               <td>Row 2, Col 15</td>
+             </tr>
+             <tr>
+               <td>Row 3, Col 1</td>
+               <td>Row 3, Col 2</td>
+               <td>Row 3, Col 3</td>
+               <td>Row 3, Col 4</td>
+               <td>Row 3, Col 5</td>
+               <td>Row 3, Col 6</td>
+               <td>Row 3, Col 7</td>
+               <td>Row 3, Col 8</td>
+               <td>Row 3, Col 9</td>
+               <td>Row 3, Col 10</td>
+               <td>Row 3, Col 11</td>
+               <td>Row 3, Col 12</td>
+               <td>Row 3, Col 13</td>
+               <td>Row 3, Col 14</td>
+               <td>Row 3, Col 15</td>
+             </tr>
+             <tr>
+               <td>Row 4, Col 1</td>
+               <td>Row 4, Col 2</td>
+               <td>Row 4, Col 3</td>
+               <td>Row 4, Col 4</td>
+               <td>Row 4, Col 5</td>
+               <td>Row 4, Col 6</td>
+               <td>Row 4, Col 7</td>
+               <td>Row 4, Col 8</td>
+               <td>Row 4, Col 9</td>
+               <td>Row 4, Col 10</td>
+               <td>Row 4, Col 11</td>
+               <td>Row 4, Col 12</td>
+               <td>Row 4, Col 13</td>
+               <td>Row 4, Col 14</td>
+               <td>Row 4, Col 15</td>
+             </tr>
+             <tr>
+               <td>Row 5, Col 1</td>
+               <td>Row 5, Col 2</td>
+               <td>Row 5, Col 3</td>
+               <td>Row 5, Col 4</td>
+               <td>Row 5, Col 5</td>
+               <td>Row 5, Col 6</td>
+               <td>Row 5, Col 7</td>
+               <td>Row 5, Col 8</td>
+               <td>Row 5, Col 9</td>
+               <td>Row 5, Col 10</td>
+               <td>Row 5, Col 11</td>
+               <td>Row 5, Col 12</td>
+               <td>Row 5, Col 13</td>
+               <td>Row 5, Col 14</td>
+               <td>Row 5, Col 15</td>
+             </tr>
+             <tr>
+               <td>Row 5, Col 1</td>
+               <td>Row 5, Col 2</td>
+               <td>Row 5, Col 3</td>
+               <td>Row 5, Col 4</td>
+               <td>Row 5, Col 5</td>
+               <td>Row 5, Col 6</td>
+               <td>Row 5, Col 7</td>
+               <td>Row 5, Col 8</td>
+               <td>Row 5, Col 9</td>
+               <td>Row 5, Col 10</td>
+               <td>Row 5, Col 11</td>
+               <td>Row 5, Col 12</td>
+               <td>Row 5, Col 13</td>
+               <td>Row 5, Col 14</td>
+               <td>Row 5, Col 15</td>
+             </tr>
+             <tr>
+               <td>Row 5, Col 1</td>
+               <td>Row 5, Col 2</td>
+               <td>Row 5, Col 3</td>
+               <td>Row 5, Col 4</td>
+               <td>Row 5, Col 5</td>
+               <td>Row 5, Col 6</td>
+               <td>Row 5, Col 7</td>
+               <td>Row 5, Col 8</td>
+               <td>Row 5, Col 9</td>
+               <td>Row 5, Col 10</td>
+               <td>Row 5, Col 11</td>
+               <td>Row 5, Col 12</td>
+               <td>Row 5, Col 13</td>
+               <td>Row 5, Col 14</td>
+               <td>Row 5, Col 15</td>
+             </tr>
+             <tr>
+               <td>Row 5, Col 1</td>
+               <td>Row 5, Col 2</td>
+               <td>Row 5, Col 3</td>
+               <td>Row 5, Col 4</td>
+               <td>Row 5, Col 5</td>
+               <td>Row 5, Col 6</td>
+               <td>Row 5, Col 7</td>
+               <td>Row 5, Col 8</td>
+               <td>Row 5, Col 9</td>
+               <td>Row 5, Col 10</td>
+               <td>Row 5, Col 11</td>
+               <td>Row 5, Col 12</td>
+               <td>Row 5, Col 13</td>
+               <td>Row 5, Col 14</td>
+               <td>Row 5, Col 15</td>
+             </tr>
+             <tr>
+               <td>Row 5, Col 1</td>
+               <td>Row 5, Col 2</td>
+               <td>Row 5, Col 3</td>
+               <td>Row 5, Col 4</td>
+               <td>Row 5, Col 5</td>
+               <td>Row 5, Col 6</td>
+               <td>Row 5, Col 7</td>
+               <td>Row 5, Col 8</td>
+               <td>Row 5, Col 9</td>
+               <td>Row 5, Col 10</td>
+               <td>Row 5, Col 11</td>
+               <td>Row 5, Col 12</td>
+               <td>Row 5, Col 13</td>
+               <td>Row 5, Col 14</td>
+               <td>Row 5, Col 15</td>
+             </tr>
+             <tr>
+               <td>Row 5, Col 1</td>
+               <td>Row 5, Col 2</td>
+               <td>Row 5, Col 3</td>
+               <td>Row 5, Col 4</td>
+               <td>Row 5, Col 5</td>
+               <td>Row 5, Col 6</td>
+               <td>Row 5, Col 7</td>
+               <td>Row 5, Col 8</td>
+               <td>Row 5, Col 9</td>
+               <td>Row 5, Col 10</td>
+               <td>Row 5, Col 11</td>
+               <td>Row 5, Col 12</td>
+               <td>Row 5, Col 13</td>
+               <td>Row 5, Col 14</td>
+               <td>Row 5, Col 15</td>
+             </tr>
+             <tr>
+               <td>Row 5, Col 1</td>
+               <td>Row 5, Col 2</td>
+               <td>Row 5, Col 3</td>
+               <td>Row 5, Col 4</td>
+               <td>Row 5, Col 5</td>
+               <td>Row 5, Col 6</td>
+               <td>Row 5, Col 7</td>
+               <td>Row 5, Col 8</td>
+               <td>Row 5, Col 9</td>
+               <td>Row 5, Col 10</td>
+               <td>Row 5, Col 11</td>
+               <td>Row 5, Col 12</td>
+               <td>Row 5, Col 13</td>
+               <td>Row 5, Col 14</td>
+               <td>Row 5, Col 15</td>
+             </tr>
+             <tr>
+               <td>Row 5, Col 1</td>
+               <td>Row 5, Col 2</td>
+               <td>Row 5, Col 3</td>
+               <td>Row 5, Col 4</td>
+               <td>Row 5, Col 5</td>
+               <td>Row 5, Col 6</td>
+               <td>Row 5, Col 7</td>
+               <td>Row 5, Col 8</td>
+               <td>Row 5, Col 9</td>
+               <td>Row 5, Col 10</td>
+               <td>Row 5, Col 11</td>
+               <td>Row 5, Col 12</td>
+               <td>Row 5, Col 13</td>
+               <td>Row 5, Col 14</td>
+               <td>Row 5, Col 15</td>
+             </tr>
+             <tr>
+               <td>Row 5, Col 1</td>
+               <td>Row 5, Col 2</td>
+               <td>Row 5, Col 3</td>
+               <td>Row 5, Col 4</td>
+               <td>Row 5, Col 5</td>
+               <td>Row 5, Col 6</td>
+               <td>Row 5, Col 7</td>
+               <td>Row 5, Col 8</td>
+               <td>Row 5, Col 9</td>
+               <td>Row 5, Col 10</td>
+               <td>Row 5, Col 11</td>
+               <td>Row 5, Col 12</td>
+               <td>Row 5, Col 13</td>
+               <td>Row 5, Col 14</td>
+               <td>Row 5, Col 15</td>
+             </tr>
+             <tr>
+               <td>Row 5, Col 1</td>
+               <td>Row 5, Col 2</td>
+               <td>Row 5, Col 3</td>
+               <td>Row 5, Col 4</td>
+               <td>Row 5, Col 5</td>
+               <td>Row 5, Col 6</td>
+               <td>Row 5, Col 7</td>
+               <td>Row 5, Col 8</td>
+               <td>Row 5, Col 9</td>
+               <td>Row 5, Col 10</td>
+               <td>Row 5, Col 11</td>
+               <td>Row 5, Col 12</td>
+               <td>Row 5, Col 13</td>
+               <td>Row 5, Col 14</td>
+               <td>Row 5, Col 15</td>
+             </tr>
+             <tr>
+               <td>Row 5, Col 1</td>
+               <td>Row 5, Col 2</td>
+               <td>Row 5, Col 3</td>
+               <td>Row 5, Col 4</td>
+               <td>Row 5, Col 5</td>
+               <td>Row 5, Col 6</td>
+               <td>Row 5, Col 7</td>
+               <td>Row 5, Col 8</td>
+               <td>Row 5, Col 9</td>
+               <td>Row 5, Col 10</td>
+               <td>Row 5, Col 11</td>
+               <td>Row 5, Col 12</td>
+               <td>Row 5, Col 13</td>
+               <td>Row 5, Col 14</td>
+               <td>Row 5, Col 15</td>
+             </tr>
+             <tr>
+               <td>Row 5, Col 1</td>
+               <td>Row 5, Col 2</td>
+               <td>Row 5, Col 3</td>
+               <td>Row 5, Col 4</td>
+               <td>Row 5, Col 5</td>
+               <td>Row 5, Col 6</td>
+               <td>Row 5, Col 7</td>
+               <td>Row 5, Col 8</td>
+               <td>Row 5, Col 9</td>
+               <td>Row 5, Col 10</td>
+               <td>Row 5, Col 11</td>
+               <td>Row 5, Col 12</td>
+               <td>Row 5, Col 13</td>
+               <td>Row 5, Col 14</td>
+               <td>Row 5, Col 15</td>
+             </tr>
+             <tr>
+               <td>Row 5, Col 1</td>
+               <td>Row 5, Col 2</td>
+               <td>Row 5, Col 3</td>
+               <td>Row 5, Col 4</td>
+               <td>Row 5, Col 5</td>
+               <td>Row 5, Col 6</td>
+               <td>Row 5, Col 7</td>
+               <td>Row 5, Col 8</td>
+               <td>Row 5, Col 9</td>
+               <td>Row 5, Col 10</td>
+               <td>Row 5, Col 11</td>
+               <td>Row 5, Col 12</td>
+               <td>Row 5, Col 13</td>
+               <td>Row 5, Col 14</td>
+               <td>Row 5, Col 15</td>
+             </tr>
+             <tr>
+               <td>Row 5, Col 1</td>
+               <td>Row 5, Col 2</td>
+               <td>Row 5, Col 3</td>
+               <td>Row 5, Col 4</td>
+               <td>Row 5, Col 5</td>
+               <td>Row 5, Col 6</td>
+               <td>Row 5, Col 7</td>
+               <td>Row 5, Col 8</td>
+               <td>Row 5, Col 9</td>
+               <td>Row 5, Col 10</td>
+               <td>Row 5, Col 11</td>
+               <td>Row 5, Col 12</td>
+               <td>Row 5, Col 13</td>
+               <td>Row 5, Col 14</td>
+               <td>Row 5, Col 15</td>
+             </tr>
+             <tr>
+               <td>Row 5, Col 1</td>
+               <td>Row 5, Col 2</td>
+               <td>Row 5, Col 3</td>
+               <td>Row 5, Col 4</td>
+               <td>Row 5, Col 5</td>
+               <td>Row 5, Col 6</td>
+               <td>Row 5, Col 7</td>
+               <td>Row 5, Col 8</td>
+               <td>Row 5, Col 9</td>
+               <td>Row 5, Col 10</td>
+               <td>Row 5, Col 11</td>
+               <td>Row 5, Col 12</td>
+               <td>Row 5, Col 13</td>
+               <td>Row 5, Col 14</td>
+               <td>Row 5, Col 15</td>
+             </tr>
+             <tr>
+               <td>Row 5, Col 1</td>
+               <td>Row 5, Col 2</td>
+               <td>Row 5, Col 3</td>
+               <td>Row 5, Col 4</td>
+               <td>Row 5, Col 5</td>
+               <td>Row 5, Col 6</td>
+               <td>Row 5, Col 7</td>
+               <td>Row 5, Col 8</td>
+               <td>Row 5, Col 9</td>
+               <td>Row 5, Col 10</td>
+               <td>Row 5, Col 11</td>
+               <td>Row 5, Col 12</td>
+               <td>Row 5, Col 13</td>
+               <td>Row 5, Col 14</td>
+               <td>Row 5, Col 15</td>
+             </tr>
+             <tr>
+               <td>Row 5, Col 1</td>
+               <td>Row 5, Col 2</td>
+               <td>Row 5, Col 3</td>
+               <td>Row 5, Col 4</td>
+               <td>Row 5, Col 5</td>
+               <td>Row 5, Col 6</td>
+               <td>Row 5, Col 7</td>
+               <td>Row 5, Col 8</td>
+               <td>Row 5, Col 9</td>
+               <td>Row 5, Col 10</td>
+               <td>Row 5, Col 11</td>
+               <td>Row 5, Col 12</td>
+               <td>Row 5, Col 13</td>
+               <td>Row 5, Col 14</td>
+               <td>Row 5, Col 15</td>
+             </tr>
+             <tr>
+               <td>Row 5, Col 1</td>
+               <td>Row 5, Col 2</td>
+               <td>Row 5, Col 3</td>
+               <td>Row 5, Col 4</td>
+               <td>Row 5, Col 5</td>
+               <td>Row 5, Col 6</td>
+               <td>Row 5, Col 7</td>
+               <td>Row 5, Col 8</td>
+               <td>Row 5, Col 9</td>
+               <td>Row 5, Col 10</td>
+               <td>Row 5, Col 11</td>
+               <td>Row 5, Col 12</td>
+               <td>Row 5, Col 13</td>
+               <td>Row 5, Col 14</td>
+               <td>Row 5, Col 15</td>
+             </tr>
+             <tr>
+               <td>Row 5, Col 1</td>
+               <td>Row 5, Col 2</td>
+               <td>Row 5, Col 3</td>
+               <td>Row 5, Col 4</td>
+               <td>Row 5, Col 5</td>
+               <td>Row 5, Col 6</td>
+               <td>Row 5, Col 7</td>
+               <td>Row 5, Col 8</td>
+               <td>Row 5, Col 9</td>
+               <td>Row 5, Col 10</td>
+               <td>Row 5, Col 11</td>
+               <td>Row 5, Col 12</td>
+               <td>Row 5, Col 13</td>
+               <td>Row 5, Col 14</td>
+               <td>Row 5, Col 15</td>
+             </tr>
+             <tr>
+               <td>Row 5, Col 1</td>
+               <td>Row 5, Col 2</td>
+               <td>Row 5, Col 3</td>
+               <td>Row 5, Col 4</td>
+               <td>Row 5, Col 5</td>
+               <td>Row 5, Col 6</td>
+               <td>Row 5, Col 7</td>
+               <td>Row 5, Col 8</td>
+               <td>Row 5, Col 9</td>
+               <td>Row 5, Col 10</td>
+               <td>Row 5, Col 11</td>
+               <td>Row 5, Col 12</td>
+               <td>Row 5, Col 13</td>
+               <td>Row 5, Col 14</td>
+               <td>Row 5, Col 15</td>
+             </tr>
+             <tr>
+               <td>Row 5, Col 1</td>
+               <td>Row 5, Col 2</td>
+               <td>Row 5, Col 3</td>
+               <td>Row 5, Col 4</td>
+               <td>Row 5, Col 5</td>
+               <td>Row 5, Col 6</td>
+               <td>Row 5, Col 7</td>
+               <td>Row 5, Col 8</td>
+               <td>Row 5, Col 9</td>
+               <td>Row 5, Col 10</td>
+               <td>Row 5, Col 11</td>
+               <td>Row 5, Col 12</td>
+               <td>Row 5, Col 13</td>
+               <td>Row 5, Col 14</td>
+               <td>Row 5, Col 15</td>
+             </tr>
+             <tr>
+               <td>Row 5, Col 1</td>
+               <td>Row 5, Col 2</td>
+               <td>Row 5, Col 3</td>
+               <td>Row 5, Col 4</td>
+               <td>Row 5, Col 5</td>
+               <td>Row 5, Col 6</td>
+               <td>Row 5, Col 7</td>
+               <td>Row 5, Col 8</td>
+               <td>Row 5, Col 9</td>
+               <td>Row 5, Col 10</td>
+               <td>Row 5, Col 11</td>
+               <td>Row 5, Col 12</td>
+               <td>Row 5, Col 13</td>
+               <td>Row 5, Col 14</td>
+               <td>Row 5, Col 15</td>
+             </tr>
+           </tbody>
+                   </table>
+                </div>
+         </div>
+            </div>
+         
+    </div>
+    <script type="module" src="./main.js"></script>
+    <script>
+        document.getElementById('toggle-sidebar').addEventListener('click', function() {
+            const sidebar = document.querySelector('.sidebar');
+            const map = document.querySelector('.main-map');
+            sidebar.classList.toggle('hidden');
+            map.classList.toggle('expanded');
+        });
+
+        document.getElementById('show-table').addEventListener('click', function() {
+            const tableContainer = document.getElementById('table-container');
+            if (tableContainer.style.display === 'none' || tableContainer.style.display === '') {
+                tableContainer.style.display = 'block';
+            } else {
+                tableContainer.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

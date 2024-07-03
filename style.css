@@ -1,0 +1,167 @@
+@import "node_modules/ol/ol.css";
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.main {
+    background-color: aliceblue;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.sidebar {
+     
+    width: 100%;
+    max-width: 440px;
+    height: 100%;
+    transition: transform 0.3s ease;
+    z-index: 1;
+    position: relative;
+}
+
+.sidebar.shrink {
+    transform: translateX(-100%);
+}
+
+.heading {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px;
+}
+
+.state-info{
+  background-color: rgb(233, 55, 10);
+  color: aliceblue;
+  padding: 10px;
+  margin: 4px;
+  border-radius: 3px;
+  text-align: center;
+} 
+.last-updated{
+  background-color: white;
+  color:  black;
+  padding: 10px;
+  margin: 4px;
+  border-radius: 3px;
+  text-align: center;
+} .section-title, .category-item {
+    background-color: black;
+    color: aliceblue;
+    padding: 10px;
+    margin: 4px;
+    border-radius: 3px;
+    text-align: center;
+}
+
+.category-item {
+    background-color: white;
+    color: inherit;
+    border: 2px solid black;
+    margin: 4px;
+}
+
+.main-map {
+     width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: width 0.3s ease, height 0.3s ease;
+    position: relative;
+    z-index: 0;
+}
+.map{
+  height: 100%;
+}
+
+.main-map.expand {
+    width: 100%;
+    height: 100%;
+}
+
+.btns {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.btn {
+    background-color: chocolate;
+    margin: 10px;
+    padding: 10px;
+}
+
+#map {
+    width: 100%;
+    height: calc(100% - 60px); /* Adjust height to account for button */
+    margin: 20px 0;
+}
+
+#toggle-sidebar{
+margin: 1px;
+}
+ #show-table {
+    position: sticky;
+    top: 10px;
+    right: 10px;
+    z-index: 2;
+    background-color: chocolate;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+
+
+    width: 60px; 
+    height: 40px; 
+    margin: 1px; 
+    position: fixed; 
+    z-index: 1;
+}
+
+#show-table {
+    top: 50px; /* Adjust positioning if needed */
+}
+
+.table-container {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background-color: white;
+    border: 1px solid black;
+    z-index: 2;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+@media (min-width: 600px) {
+    .main {
+        flex-direction: row;
+    }
+
+    .sidebar {
+        width: 440px;
+        height: 100%;
+    }
+
+    .main-map {
+        height: 100%;
+    }
+
+    .btns {
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    #map {
+        height: 100%;
+    }
+}

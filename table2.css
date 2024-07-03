@@ -1,0 +1,88 @@
+*{
+    padding: 0;
+    margin: 0;
+    
+}
+.tbl{
+    height: 400px;
+    margin-bottom: 0px;
+}
+.navbar{
+    display: flex;
+    justify-content: space-between;
+    background-color: #e35f0e;  
+  overflow: hidden;
+}
+.nav-left a{
+  
+    float: left; 
+    display: block;  
+    color: white; 
+    text-align: center;  
+    padding: 14px 20px; 
+    text-decoration: none;
+}
+
+
+.nav-right a{
+     
+    
+    float: left; 
+    display: block;  
+    color: white; 
+    text-align: center;  
+    padding: 14px 20px; 
+    text-decoration: none;
+
+}
+.nav-left a:hover{
+    background-color: #ddd;  
+    color: black;
+}
+.nav-right a:hover{
+    background-color: #ddd; 
+    color: black;
+}
+.nav-left a:active{
+    background-color: #4CAF50;  
+    color: white;
+}
+.nav-right a:active{
+    background-color: #4CAF50;  
+    color: white;
+
+}
+ .heading th:hover{
+    color: #e35f0e;
+ }
+ .heading th:active{
+    color: #e35f0e;
+ }
+ .subcolomn td:hover{
+    color: #465ade;
+ }
+ tbody tr{
+    height: 40px;
+ }
+ .subcolomn td{
+    
+    padding: 4px;
+     
+ }
+ @media (max-width: 768px) {
+    table {
+      overflow-x: auto;
+      display: block;
+    }
+    th, td {
+      display: block;
+    }
+    tbody {
+      display: block;
+      width: auto;
+      position: relative;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      white-space: nowrap;
+    }
+}
