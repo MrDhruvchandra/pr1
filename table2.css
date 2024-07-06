@@ -1,8 +1,4 @@
-*{
-    padding: 0;
-    margin: 0;
-    
-}
+ 
 .tbl{
     height: 400px;
     margin-bottom: 0px;
@@ -61,14 +57,14 @@
  .subcolomn td:hover{
     color: #465ade;
  }
- tbody tr{
+ /* tbody tr{
     height: 40px;
  }
  .subcolomn td{
     
     padding: 4px;
      
- }
+ } */
  @media (max-width: 768px) {
     table {
       overflow-x: auto;
