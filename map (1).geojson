@@ -1,0 +1,134 @@
+{
+ " DropdownLinksTwo":   [
+      {
+        "type": "Feature",
+        "properties": {
+          "name": "xxyz"
+        },
+        "geometry": {
+          "coordinates": [
+            81.0040106777401,
+            26.85667294631095
+          ],
+          "type": "Point"
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "name": "sdsd"
+        },
+        "geometry": {
+          "coordinates": [
+            81.00459450607889,
+            26.836227491236258
+          ],
+          "type": "Point"
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "name": "dsdsd"
+        },
+        "geometry": {
+          "coordinates": [
+            80.98065754414642,
+            26.8772448980921
+          ],
+          "type": "Point"
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "name": "dff"
+        },
+        "geometry": {
+          "coordinates": [
+            80.89892157657397,
+            26.86057930088498
+          ],
+          "type": "Point"
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "name": "gsdg"
+        },
+        "geometry": {
+          "coordinates": [
+            80.9177500405325,
+            26.84104617946359
+          ],
+          "type": "Point"
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "name": "ghtr"
+        },
+        "geometry": {
+          "coordinates": [
+            80.92811299356345,
+            26.88453532447693
+          ],
+          "type": "Point"
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "name": "erwwe"
+        },
+        "geometry": {
+          "coordinates": [
+            80.94518997250287,
+            26.87086538929907
+          ],
+          "type": "Point"
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "name": "teh"
+        },
+        "geometry": {
+          "coordinates": [
+            80.96635374982179,
+            26.826719748273078
+          ],
+          "type": "Point"
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "name": "tyetytr"
+        },
+        "geometry": {
+          "coordinates": [
+            80.97350564698479,
+            26.85419885198894
+          ],
+          "type": "Point"
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "name": "asdasd"
+        },
+        "geometry": {
+          "coordinates": [
+            80.99992387936067,
+            26.86904260638856
+          ],
+          "type": "Point"
+        }
+      }
+    ]
+}

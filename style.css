@@ -25,6 +25,9 @@
     z-index: 1;
     position: relative;
 }
+.sidebar2,#menu-icon{
+display: none;
+}
 
 .sidebar.shrink {
     transform: translateX(-100%);
@@ -37,7 +40,7 @@
 }
 
 .state-info{
-  background-color: rgb(233, 55, 10);
+  background-color: rgb(245 85 45 / 87%);
   color: aliceblue;
   padding: 10px;
   margin: 4px;
@@ -59,6 +62,174 @@
     border-radius: 3px;
     text-align: center;
 }
+ 
+  
+  
+  .dropdown-container {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .dropdown-trigger {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    gap: 255px;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  .dropdown-trigger span {
+    transition: transform 0.2s;
+  }
+  
+  .dropdown-container:hover .dropdown-trigger span {
+    transform: rotate(180deg);
+  }
+  
+  .dropdown-menu {
+    position: absolute;
+    left: 385px;
+    z-index: 9999;
+    display: none;
+    width: 150px;
+     background-color: black;
+    color: white;
+    padding: 8px;
+    border-radius: 6px;
+  }
+  .dropdown-menu li{
+    border: 2px solid rgba(218, 218, 218, 0.531);
+margin: 0;
+  }
+  .dropdown-container:hover .dropdown-menu {
+    display: block;
+  }
+  
+  .dropdown-link {
+    display: inline-block;
+    width: 100%;
+    padding: 10px;
+    border-radius: 1px;
+    text-decoration: none;
+    color: inherit;
+    transition: background-color 0.2s;
+  }
+  
+  .dropdown-link:hover {
+    background-color: rgba(59, 130, 246, 0.2); /* Example color for hover effect */
+  }
+  
+  .dropdown-menu ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  
+  .dropdown-menu li + li {
+    margin-top: 0px;
+
+  }
+  .dynamic-ul li+li{
+    /* width: 22vw;
+    height: 35vh; 
+    margin: 15px; 
+    padding: 3px; 
+    position: fixed; 
+    top:34px; 
+    left:40rem; 
+    border: 2px solid rgb(5, 0, 0); 
+    border-radius: 24px; 
+    background-color:white;  */
+    color: black; 
+    /* z-index: 1; */
+  }
+  
+  .dropdown-container-1 {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .dropdown-trigger-1 {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    gap: 255px;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  .dropdown-trigger-1 span {
+    transition: transform 0.2s;
+  }
+  
+  .dropdown-container-1:hover .dropdown-trigger-1 span {
+    transform: rotate(180deg);
+  }
+  
+  .dropdown-menu-1 {
+    position: absolute;
+    left: 385px;
+    z-index: 9999;
+    display: none;
+    width: 150px;
+     background-color: black;
+    color: white;
+    padding: 8px;
+    border-radius: 6px;
+  }
+  .dropdown-menu-1 li{
+    border: 2px solid rgba(218, 218, 218, 0.531);
+margin: 0;
+  }
+  .dropdown-container-1:hover .dropdown-menu-1 {
+    display: block;
+  }
+  
+  .dropdown-link-2 {
+    display: inline-block;
+    width: 100%;
+    padding: 10px;
+    border-radius: 1px;
+    text-decoration: none;
+    color: inherit;
+    transition: background-color 2s;
+  }
+  
+  .dropdown-link-1:hover {
+    background-color: rgba(59, 130, 246, 0.2); /* Example color for hover effect */
+  }
+  
+  
+  /* roads dropdown */
+  .dropdown-menu-1 ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  
+  .dropdown-menu-1 li + li {
+    margin-top: 0px;
+
+  }
+  .dynamic-ul-1 li+li{
+    /* width: 22vw;
+    height: 35vh; 
+    margin: 15px; 
+    padding: 3px; 
+    position: fixed; 
+    top:34px; 
+    left:40rem; 
+    border: 2px solid rgb(5, 0, 0); 
+    border-radius: 24px; 
+    background-color:white;  */
+    color: black; 
+    /* z-index: 1; */
+  }
+  
+/* search input dwopdown */
 
 .category-item {
     background-color: white;
@@ -127,7 +298,8 @@ margin: 1px;
 }
 
 #show-table {
-    top: 50px; /* Adjust positioning if needed */
+    top: 26rem; /* Adjust positioning if needed */
+    border-radius: 10px;
 }
 
 .table-container {
@@ -140,10 +312,116 @@ margin: 1px;
     max-height: 200px;
     overflow-y: auto;
 }
+ 
+.tbl{
+    height: 400px;
+    margin-bottom: 0px;
+}
+.navbar{
+    display: flex;
+    justify-content: space-between;
+    background-color: #e35f0e;  
+  overflow: hidden;
+}
+.nav-left a{
+  
+    float: left; 
+    display: block;  
+    color: white; 
+    text-align: center;  
+    padding: 14px 20px; 
+    text-decoration: none;
+}
+
+
+.nav-right a{
+     
+    
+    float: left; 
+    display: block;  
+    color: white; 
+    text-align: center;  
+    padding: 14px 20px; 
+    text-decoration: none;
+
+}
+.nav-left a:hover{
+    background-color: #3cf124;  
+    color: black;
+}
+.nav-right a:hover{
+    background-color: #3cf124; 
+    color: black;
+}
+.nav-left a:active{
+    background-color: #4CAF50;  
+    color: white;
+}
+.nav-right a:active{
+    background-color: #4CAF50;  
+    color: white;
+
+}
+ .heading th:hover{
+    color: #e35f0e;
+ }
+ .heading th:active{
+    color: #e35f0e;
+ }
+ .subcolomn td:hover{
+    color: #465ade;
+ }
+ tbody tr{
+    height: 40px;
+ }
+ .subcolomn td{
+    
+    padding: 4px;
+     
+ }
+ th,tr, td {
+    border: 1px solid black;
+    
+  
+  }
+
+
+  .lower-table{
+    width: 50%;
+     
+  }
+#search-input,#search-input-div,#search-input-dropdown{
+  display: none;
+}
+
+
+
+ @media (max-width: 768px) {
+    table {
+      overflow-x: auto;
+      display: block;
+    }
+    th, td {
+      display: block;
+    }
+    tbody {
+      display: block;
+      width: auto;
+      position: relative;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      white-space: nowrap;
+    }
+    #show-table{
+        width: 2vw;
+    }
+}
 
 @media (min-width: 600px) {
     .main {
         flex-direction: row;
+        
+        
     }
 
     .sidebar {
@@ -166,3 +444,63 @@ margin: 1px;
         height: 100%;
     }
 }
+@media  (max-width:600px) {
+    .main{
+        padding: 0;
+        margin: 0;
+    }
+    .icon-btn button{
+        position: sticky;
+        display: none;
+    }
+    .sidebar{
+        display:none;
+    }
+    .sidebar2{
+display: none;
+    }
+    #menu-icon{
+         
+        display:block;
+        z-index: 1;
+        height: 40px;
+        width: 100%;
+        margin: 0 0 -20px 0px;
+        padding: 12px;
+        background-color: black;
+        color: aliceblue;
+    }
+    #map {
+        height: 100%;
+        width: 100%;
+        background: cover;
+    }
+    #toggle-sidebar{
+       display: none;
+        }
+        #show-table{
+            right: 0px;
+            top: 26rem;
+        }
+       
+        
+}
+ @media (max-width: 768px) {
+            .lower-table {
+                width: 90vw; /* Increase the width to 90% of the viewport width for screens smaller than 768px */
+            }
+            #show-table{
+                width: 3vw;
+                opacity: .6;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .lower-table {
+                width: 100vw; /* Increase the width to 100% of the viewport width for screens smaller than 480px */
+            }
+            #show-table{
+                width: 1vw;
+                opacity: .6;
+            }
+        }
