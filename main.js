@@ -121,7 +121,7 @@ async function addStateGeoJSONLayer(map) {
 
         const dataLayer = new ol.layer.Vector({
             source: vectorSource,
-            visible: false,
+            visible: true,
             title: 'India States'
         });
 
@@ -205,18 +205,15 @@ addDistrictGeoJSONLayer(map);
 //     }
 // }
 
-// addGeoJSONLayer(map);
-// const data = new ol.layer.Vector({
-//     source: new ol.source.Vector({
-//         url: ' http://localhost:3000/geojson',
-//         format: new ol.format.GeoJSON()
-//     }),
-//     visible: true,
-//     title: 'data'
-// });
+const data = new ol.layer.Vector({
+    source: new ol.source.Vector({
+        url: 'map (1).geojson',
+        format: new ol.format.GeoJSON()
+    }),
+    visible: true,
+    title: 'data'
+});
 
-// map.addLayer(data);
-
-
+map.addLayer(data);
 
 }
