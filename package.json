@@ -7,10 +7,14 @@
     "serve": "vite preview"
   },
   "devDependencies": {
-    "vite": "^5.3.1"
+    "vite": "^5.3.1",
+    "webpack": "^5.93.0",
+    "webpack-cli": "^5.1.4"
   },
   "dependencies": {
-    "ol": "latest"
-    
+    "@turf/turf": "^7.0.0",
+    "geolib": "^3.3.4",
+    "ol": "latest",
+    "wellknown": "^0.5.0"
   }
 }

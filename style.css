@@ -36,7 +36,7 @@ display: none;
 .heading {
     display: flex;
     justify-content: space-between;
-    margin: 20px;
+    margin: 0px;
 }
 
 .state-info{
@@ -62,175 +62,320 @@ display: none;
     border-radius: 3px;
     text-align: center;
 }
- 
-  
-  
-  .dropdown-container {
+ /* bridge dropdown */
+ .bridge-dropdown-list {
+    display: none;
+    background-color: white;
+    border: 0;
+    border-bottom: 1px solid transparent;
+    border-radius: 7px;
+    height: 200px;
+    width: 300px;
+}
+
+.bridge-dropdown {
+    
     position: relative;
     display: inline-block;
-  }
-  
-  .dropdown-trigger {
-    display: flex;
+    text-align: center;
     align-items: center;
-    height: 100%;
-    gap: 255px;
-    cursor: pointer;
-    text-decoration: none;
-    color: inherit;
-  }
-  
-  .dropdown-trigger span {
-    transition: transform 0.2s;
-  }
-  
-  .dropdown-container:hover .dropdown-trigger span {
-    transform: rotate(180deg);
-  }
-  
-  .dropdown-menu {
-    position: absolute;
-    left: 385px;
-    z-index: 9999;
-    display: none;
-    width: 150px;
-     background-color: black;
-    color: white;
-    padding: 8px;
-    border-radius: 6px;
-  }
-  .dropdown-menu li{
-    border: 2px solid rgba(218, 218, 218, 0.531);
-margin: 0;
-  }
-  .dropdown-container:hover .dropdown-menu {
-    display: block;
-  }
-  
-  .dropdown-link {
-    display: inline-block;
-    width: 100%;
-    padding: 10px;
-    border-radius: 1px;
-    text-decoration: none;
-    color: inherit;
-    transition: background-color 0.2s;
-  }
-  
-  .dropdown-link:hover {
-    background-color: rgba(59, 130, 246, 0.2); /* Example color for hover effect */
-  }
-  
-  .dropdown-menu ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-  
-  .dropdown-menu li + li {
-    margin-top: 0px;
+ }
 
-  }
-  .dynamic-ul li+li{
-    /* width: 22vw;
-    height: 35vh; 
-    margin: 15px; 
-    padding: 3px; 
-    position: fixed; 
-    top:34px; 
-    left:40rem; 
-    border: 2px solid rgb(5, 0, 0); 
-    border-radius: 24px; 
-    background-color:white;  */
-    color: black; 
-    /* z-index: 1; */
-  }
-  
-  .dropdown-container-1 {
-    position: relative;
-    display: inline-block;
-  }
-  
-  .dropdown-trigger-1 {
-    display: flex;
-    align-items: center;
-    height: 100%;
-    gap: 255px;
+.bridge-dropdown button {
+    background:transparent;
+    border: none;
+    padding: 3px 15px;
+    font-size: 23px;
     cursor: pointer;
-    text-decoration: none;
-    color: inherit;
-  }
-  
-  .dropdown-trigger-1 span {
-    transition: transform 0.2s;
-  }
-  
-  .dropdown-container-1:hover .dropdown-trigger-1 span {
-    transform: rotate(180deg);
-  }
-  
-  .dropdown-menu-1 {
-    position: absolute;
-    left: 385px;
-    z-index: 9999;
-    display: none;
-    width: 150px;
-     background-color: black;
-    color: white;
-    padding: 8px;
-    border-radius: 6px;
-  }
-  .dropdown-menu-1 li{
-    border: 2px solid rgba(218, 218, 218, 0.531);
-margin: 0;
-  }
-  .dropdown-container-1:hover .dropdown-menu-1 {
-    display: block;
-  }
-  
-  .dropdown-link-2 {
-    display: inline-block;
-    width: 100%;
-    padding: 10px;
-    border-radius: 1px;
-    text-decoration: none;
-    color: inherit;
-    transition: background-color 2s;
-  }
-  
-  .dropdown-link-1:hover {
-    background-color: rgba(59, 130, 246, 0.2); /* Example color for hover effect */
-  }
-  
-  
-  /* roads dropdown */
-  .dropdown-menu-1 ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-  
-  .dropdown-menu-1 li + li {
-    margin-top: 0px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s;
+}
+ #bridge-dropdown-li-button{
+    background:transparent;
+    border: none;
+    padding: 3px 15px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s;
+ }
 
-  }
-  .dynamic-ul-1 li+li{
-    /* width: 22vw;
-    height: 35vh; 
-    margin: 15px; 
-    padding: 3px; 
-    position: fixed; 
-    top:34px; 
-    left:40rem; 
-    border: 2px solid rgb(5, 0, 0); 
-    border-radius: 24px; 
-    background-color:white;  */
-    color: black; 
-    /* z-index: 1; */
-  }
+.bridge-dropdown-list {
+    display: none;
+    position: absolute;
+    background: #fff;
+    width: 160px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    z-index: 1;
+}
+
+.bridge-dropdown-list ul {
+    list-style-type: none;
+    margin: 0px;
+    padding: 0;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.bridge-dropdown-list ul li {
+    padding-top: 10px;
+    padding-left: 5px;
+    margin: 0;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.bridge-dropdown-list ul li a {
+    text-decoration: none;
+    color: #333;
+    display: block;
+    width: 100%;
+}
+
+.bridge-dropdown-list ul li:hover {
+    background-color: #e1e1e1;
+}
   
+  
+  /* search input */
+  ::placeholder {
+    color: #555;
+}
+
+.result-box ul {
+    border-top: 1px solid #999;
+    padding: 1px 10px;
+}
+
+.result-box ul li {
+    list-style: none;
+    border-radius: 3px;
+    padding: 15px 10px;
+    cursor: pointer;
+}
+
+.result-box ul li:hover {
+    background: #e9f3ff;
+}
 /* search input dwopdown */
+.search-dropdown-list {
+    display: none;
+    background-color: white;
+    border: 0;
+    border-bottom: 1px solid transparent;
+    border-radius: 7px;
+    height: 200px;
+    width: 300px;
+}
 
+.search-dropdown {
+    
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    align-items: center;
+ }
+
+.search-dropdown button {
+    background:transparent;
+    border: none;
+    padding: 3px 15px;
+    font-size: 23px;
+    cursor: pointer;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s;
+}
+ #search-dropdown-li-button{
+    background:transparent;
+    border: none;
+    padding: 3px 15px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s;
+ }
+
+.search-dropdown-list {
+    display: none;
+    position: absolute;
+    background: #fff;
+    width: 160px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    z-index: 1;
+}
+
+.search-dropdown-list ul {
+    list-style-type: none;
+    margin: 0px;
+    padding: 0;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.search-dropdown-list ul li {
+    padding-top: 10px;
+    padding-left: 5px;
+    margin: 0;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.search-dropdown-list ul li a {
+    text-decoration: none;
+    color: #333;
+    display: block;
+    width: 100%;
+}
+
+.search-dropdown-list ul li:hover {
+    background-color: #e1e1e1;
+}
+/* measure box */
+
+.measure-box-header {
+    color: #fff;
+    text-align: center;
+    align-items: center;
+    border-bottom: 2px solid #fff;
+    margin: 5px;
+    padding-left: 15px;
+    height: 42px;
+    width: 23vw;
+    font-size: larger;
+}
+
+.measure-box-list-button button {
+    background-color: blue;
+    color: #fff;
+    border: 0;
+    font-size: unset;
+}
+
+.measure-box-list,
+.measure-box-submit select {
+    background-color: #fff;
+    margin: 10px;
+    padding-left: 15px;
+    height: 42px;
+    width: 20vw;
+}
+
+.measure-box-list div {
+    padding-top: 10px;
+    font-size: larger;
+    font-weight: 300;
+    margin-top: 25px;
+}
+
+.measure-box-list select {
+    border: 0;
+    outline: 0;
+}
+/* query pannel button */
+.query-pannel-header-ul button {
+    background: transparent;
+    text-decoration: none;
+    border: 0;
+    color: #fff;
+}
+
+.query-pannel-header-ul button:hover {
+    background: #e2e2e2;
+    box-shadow: 2px 2px 5px 0px rgba(243, 17, 17, 0.5);
+    color: black;
+    height: 2em;
+}
+
+
+
+
+        .query-pannel-button button {
+            background-color: blue;
+            color: #fff;
+            border: 0;
+            font-size: unset;
+        }
+        .query-pannel-button button:hover {
+            border: 0;
+            font-size: unset;
+            color: black;
+            background: #e2e2e2;
+            text-align: center;
+            align-items: center;
+            
+        }
+        
+        .attribute-box-list,
+        .query-pannel-submit input {
+            background-color: #fff;
+            margin: 5px;
+            padding-left: 15px;
+            height: 42px;
+            width: 20vw;
+        }
+
+        .attribute-box-list div {
+            padding-top: 10px;
+            font-size: larger;
+            font-weight: 300;
+            margin-top: 25px;
+        }
+
+        .draw-box-list div {
+            padding-top: 10px;
+            font-size: larger;
+            font-weight: 300;
+            margin-top: 25px;
+        }
+
+        .draw-box-list {
+            background-color: #fff;
+            margin: 5px;
+            padding-left: 15px;
+            height: 42px;
+            width: 20vw;
+
+        }
+/* layer list */
+.layer-header {
+    color: #fff;
+    height: 50px;
+    font-size: large;
+    text-align: center;
+    align-items: center;
+}
+
+
+
+.layer-button button {
+    background-color: blue;
+    color: #fff;
+    border: 0;
+    font-size: unset;
+}
+
+.layer-box-list,
+.layer-submit input {
+    background-color: #fff;
+    margin: 5px;
+    padding-left: 15px;
+    height: 42px;
+    width: 20vw;
+}
+
+.layer-box-list div {
+    padding-top: 10px;
+    font-size: larger;
+    font-weight: 300;
+    margin-top: 25px;
+}
+/*    */
 .category-item {
     background-color: white;
     color: inherit;
@@ -390,10 +535,23 @@ margin: 1px;
     width: 50%;
      
   }
+  /* search input box */
 #search-input,#search-input-div,#search-input-dropdown{
   display: none;
 }
-
+/* map layer div */
+.map-layer input{
+        height: 1.5em;
+        width: 1em;
+        margin: 7px;
+        padding: 0px;
+}
+.map-layer h2{
+    font-size: larger;
+ background-color: #e35f0e; 
+ border-radius: 3px;      
+         padding-inline: 15px;
+}
 
 
  @media (max-width: 768px) {

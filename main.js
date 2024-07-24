@@ -1,317 +1,84 @@
-import './style.css';
-import {Map, View} from 'ol';
-import TileLayer from 'ol/layer/Tile';
-import OSM from 'ol/source/OSM';
-import {fromLonLat} from 'ol/proj';
-import { preventDefault } from 'ol/events/Event';
+// import WKB from 'wkb';
+window.onload = init;
 
-const map = new Map({
-  target: 'map',
-  layers: [
-    new TileLayer({
-      source: new OSM()
-    })
-  ],
-  view: new View({
-    center: fromLonLat([78.9629, 20.5937]), // Longitude and latitude of India
-    zoom: 5 // Adjust the zoom level as needed
-  })
-});
+function init() {
+    const map = new ol.Map({
+        view: new ol.View({
+            center: ol.proj.fromLonLat([78.9629, 20.5937]), // Center the map on India
+            zoom: 5,
+            projection: 'EPSG:3857' // Ensure the map uses EPSG:3857 projection
+        }),
+        target: 'map'
+    });
 
-//  search input box onclick
-// const DropdownLinksOfSearchInput = [
-//   { name: "Link 1", link: "link1" },
-//   { name: "Link 2", link: "link2" },
-//   { name: "Link 3", link: "link3" }
-// ];
+    // Base maps layers
+    const openStreetMapStandard = new ol.layer.Tile({
+        source: new ol.source.OSM(),
+        visible: true,
+        title: 'OSMStandard'
+    });
 
-
-// dropdown buttom
-const DropdownLinks = [
-  { name: "Link 1", link: "link1" },
-  { name: "Link 2", link: "link2" },
-  { name: "Link 3", link: "link3" }
-];
-
-const dropdownLinksContainer = document.getElementById('dropdown-links');
-DropdownLinks.forEach(data => {
-  const li = document.createElement('li');
-  const a = document.createElement('a');
-  a.className = 'dropdown-link';
-  a.href = data.link;
-  a.textContent = data.name;
-  li.appendChild(a);
-  dropdownLinksContainer.appendChild(li);
-});
-// for dropdown two
-// search input dropdown 
-const DropdownLinksTwo = [
-  // { name: "Link 1", link: "link1" },
-  // { name: "Link 2", link: "link2" },
-  // { name: "Link 3", link: "link3" }
-  {
-    "type": "Feature",
-    "properties": {
-      "name": "xxyz"
-    },
-    "geometry": {
-      "coordinates": [
-        81.0040106777401,
-        26.85667294631095
-      ],
-      "type": "Point"
-    }
-  },
-  {
-    "type": "Feature",
-    "properties": {
-      "name": "sdsd"
-    },
-    "geometry": {
-      "coordinates": [
-        81.00459450607889,
-        26.836227491236258
-      ],
-      "type": "Point"
-    }
-  },
-  {
-    "type": "Feature",
-    "properties": {
-      "name": "dsdsd"
-    },
-    "geometry": {
-      "coordinates": [
-        80.98065754414642,
-        26.8772448980921
-      ],
-      "type": "Point"
-    }
-  },
-  {
-    "type": "Feature",
-    "properties": {
-      "name": "dff"
-    },
-    "geometry": {
-      "coordinates": [
-        80.89892157657397,
-        26.86057930088498
-      ],
-      "type": "Point"
-    }
-  },
-  {
-    "type": "Feature",
-    "properties": {
-      "name": "gsdg"
-    },
-    "geometry": {
-      "coordinates": [
-        80.9177500405325,
-        26.84104617946359
-      ],
-      "type": "Point"
-    }
-  },
-  {
-    "type": "Feature",
-    "properties": {
-      "name": "ghtr"
-    },
-    "geometry": {
-      "coordinates": [
-        80.92811299356345,
-        26.88453532447693
-      ],
-      "type": "Point"
-    }
-  },
-  {
-    "type": "Feature",
-    "properties": {
-      "name": "erwwe"
-    },
-    "geometry": {
-      "coordinates": [
-        80.94518997250287,
-        26.87086538929907
-      ],
-      "type": "Point"
-    }
-  },
-  {
-    "type": "Feature",
-    "properties": {
-      "name": "teh"
-    },
-    "geometry": {
-      "coordinates": [
-        80.96635374982179,
-        26.826719748273078
-      ],
-      "type": "Point"
-    }
-  },
-  {
-    "type": "Feature",
-    "properties": {
-      "name": "tyetytr"
-    },
-    "geometry": {
-      "coordinates": [
-        80.97350564698479,
-        26.85419885198894
-      ],
-      "type": "Point"
-    }
-  },
-  {
-    "type": "Feature",
-    "properties": {
-      "name": "asdasd"
-    },
-    "geometry": {
-      "coordinates": [
-        80.99992387936067,
-        26.86904260638856
-      ],
-      "type": "Point"
-    }
-  }
-];
-const dropdownLinksContainerTwo = document.getElementById('dropdown-links-2');
-// console.log(dropdownLinksContainerTwo);
-DropdownLinksTwo.forEach(data => {
-  const li = document.createElement('li');
-  const a = document.createElement('a');
-  a.className =  data.geometry.type;
-  a.id=data.properties.name;
-  a.href = data.type;
-  a.textContent = data.properties.name;
-  li.appendChild(a);
-  dropdownLinksContainerTwo.appendChild(li);
-  // console.log(dropdownLinksContainerTwo);
-
-});
-const searchInput=document.getElementById('search-input');
-
-const dynamicLi=document.getElementById('dropdown-links-2').querySelectorAll('li');
-   console.log(dynamicLi);
-   dynamicLi.forEach(li => {
-     
-     li.addEventListener('click',()=>{
-   
-   DropdownLinksTwo.forEach(data => {
-     searchInput.value=data.geometry.coordinates;
-     map.view.center=data.
-   });
-})
-});
-
-function liClick(){
-   
-   DropdownLinksTwo.forEach(data => {
-     searchInput.value=data.geometry.coordinates;
-   });
-}
-
-
-
-
-
-
-
-
-// Function to toggle the dropdown
-   function toggleDropdown() {
-  document.getElementById("myDropdown").classList.toggle("show");
-   }
-
-// Close the dropdown if the user clicks outside of it
-window.onclick = function(event) {
-  if (!event.target.matches('.dropbtn')) {
-      var dropdowns = document.getElementsByClassName("dropdown-content");
-      for (var i = 0; i < dropdowns.length; i++) {
-          var openDropdown = dropdowns[i];
-          if (openDropdown.classList.contains('show')) {
-              openDropdown.classList.remove('show');
-          }
-      }
-  }
-window.onclick = function(event) {
-  if (!event.target.matches('.dropbtn')) {
-      var dropdowns = document.getElementsByClassName("dropdown-content");
-      for (var i = 0; i < dropdowns.length; i++) {
-          var openDropdown = dropdowns[i];
-          if (openDropdown.classList.contains('show')) {
-              openDropdown.classList.remove('show');
-          }
-      }
-  }
-}
-}
-
-document.getElementsByClassName('ol-overlaycontainer') ;
-let searchButtom= document.getElementById("search-btn");
-let searchText= document.getElementById("search-text");
-let mesurementButtom= document.getElementById("measurement-btn");
-let mesureText= document.getElementById("measure-text");
-let gridButtom= document.getElementById("grid-btn");
-let gridText= document.getElementById("grid-text");
-let listButtom= document.getElementById("list-btn");
-let listText= document.getElementById("list-text");
-let zoomInText= document.getElementById("zoom-in-text");
-let zoomOutText= document.getElementById("zoom-out-text");
-let toggleButtom= document.getElementById("toggle-sidebar");
-let toggleText= document.getElementById("toggle-text");
-const divOlZoom=document.getElementsByClassName('ol-zoom ol-unselectable ol-control')[0];
+    const openStreetMapHumanitarian = new ol.layer.Tile({
+        source: new ol.source.OSM({
+            url: 'https://{a-c}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png'
+        }),
+        visible: false,
+        title: 'OSMHumanitarian'
+    });
  
-divOlZoom.style.display="flex";
-divOlZoom.style.justifyContent="space-around";
-divOlZoom.style.gap="13px";
-divOlZoom.style.flexDirection="column";
-divOlZoom.style.margin="13px";
-divOlZoom.style.backgroundColor=" transparent";
-divOlZoom.style.border=" none";
-divOlZoom.appendChild(toggleButtom);
-divOlZoom.appendChild(toggleText);
-divOlZoom.appendChild(searchButtom);
-divOlZoom.appendChild(searchText);
-
-divOlZoom.appendChild(mesurementButtom);
-divOlZoom.appendChild(mesureText);
-divOlZoom.appendChild(gridButtom);
-divOlZoom.appendChild(gridText);
-divOlZoom.appendChild(listButtom);
-divOlZoom.appendChild(listText);
  
+    const cartoDBPositron = new ol.layer.Tile({
+        source: new ol.source.XYZ({
+            url: 'https://{a-d}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png'
+        }),
+        visible: false,
+        title: 'CartoDBPositron'
+    });
+    const bingMapsSatellite = new ol.layer.Tile({
+        source: new ol.source.XYZ({
+            url: 'https://ecn.t0.tiles.virtualearth.net/tiles/a{q}.png?g=1&key=Your-Bing-Maps-Key-Here' // Replace with your Bing Maps API key
+        }),
+        visible: false,
+        title: 'BingSatellite'
+    });
+    
+    // Layer group
+    const baseLayerGroup = new ol.layer.Group({
+        layers: [
+            openStreetMapStandard,
+            openStreetMapHumanitarian,
+            bingMapsSatellite,
+            cartoDBPositron
+        ]
+    });
 
-toggleButtom.style.top="0rem" ;
-toggleButtom.style.width=" 40px"; 
-toggleButtom.style.height= "40px";
-toggleButtom.style.margin= "1px"; 
- toggleButtom.style.padding= "3px"; 
- toggleButtom.style.position= "sticky"; 
- toggleButtom.style.left= "29rem"; 
- toggleButtom.style.top="-5rem" ;
- 
-  toggleButtom.style.border=" 2px solid white"; 
-  toggleButtom.style.borderRadius= "24px";
-  toggleButtom.style.backgroundColor= "black"; 
-  toggleButtom.style.color= "aliceblue";
+    map.addLayer(baseLayerGroup);
 
- 
+    //layer swicher 
+    const baseLayerElements=document.querySelectorAll('.map-layer > input[type=radio]');
+    for(let baseLayerElement of baseLayerElements ){
+        // console.log(baseLayerElement);
+        baseLayerElement.addEventListener('change',function(){
+            let baseLayerElementValue=this.value;
+            baseLayerGroup.getLayers().forEach(function(element, index, array){
+                let baseLayerTitle = element.get('title');
+                element.setVisible(baseLayerTitle === baseLayerElementValue);
+            })
+        })
+    }
+
+// zoom in zoom out button styling
+    
 const zoomIn=document.getElementsByClassName('ol-zoom-in')[0];
 const zoomOut=document.getElementsByClassName('ol-zoom-out')[0];
-document.getElementsByClassName('ol-zoom ol-unselectable ol-control')[0].style.gap=".5rem";
-// const olMapMainDiv= document.getElementsByClassName('ol-overlaycontainer-stopevent');
-
-// olMapMainDiv.appendChild(toggleButtom);
-divOlZoom.appendChild(zoomIn);
-divOlZoom.appendChild(zoomInText);
-divOlZoom.appendChild(zoomOut);
-divOlZoom.appendChild(zoomOutText);
+ document.getElementsByClassName('ol-zoom ol-unselectable ol-control')[0].style.top="21rem";
+document.getElementsByClassName('ol-zoom ol-unselectable ol-control')[0].style.left=".3rem";
+document.getElementsByClassName('ol-zoom ol-unselectable ol-control')[0].style.height="6.5rem";
+document.getElementsByClassName('ol-zoom ol-unselectable ol-control')[0].style.display="flex";
+document.getElementsByClassName('ol-zoom ol-unselectable ol-control')[0].style.flexDirection="column";
+document.getElementsByClassName('ol-zoom ol-unselectable ol-control')[0].style.justifyContent="space-between";
+document.getElementsByClassName('ol-zoom ol-unselectable ol-control')[0].style.background="transparent";
+ 
 zoomIn.style.width=" 40px"; 
 zoomIn.style.height= "40px";
  zoomIn.style.margin= "1px"; 
@@ -322,8 +89,7 @@ zoomIn.style.height= "40px";
   
   zoomIn.style.border=" 2px solid white"; 
   zoomIn.style.borderRadius= "24px";
-  toggleButtom.style.borderRadius= "5px";
-  zoomIn.style.backgroundColor= "black"; 
+   zoomIn.style.backgroundColor= "black"; 
   zoomIn.style.color= "aliceblue";
  
 zoomOut.style.width=" 40px"; 
@@ -332,27 +98,125 @@ zoomOut.style.margin= "1px";
  zoomOut.style.padding= "3px"; 
  zoomOut.style.position= "sticky"; 
  zoomOut.style.left= "0rem"; 
- toggleButtom.style.left= "0rem"; 
- zoomOut.style.top="4rem" ;
+  zoomOut.style.top="4rem" ;
  
   zoomOut.style.border=" 2px solid white"; 
   zoomOut.style.borderRadius= "24px";
   zoomOut.style.backgroundColor= "black"; 
   zoomOut.style.color= "aliceblue";
- const divRightBtn=document.getElementsByClassName('div class="ol-overlaycontainer-stopevent')[0];
-const iconBtn=document.getElementsByClassName('icon-btn')[0]
-divRightBtn.appendChild(iconBtn)
 
-//  search buttom input 
 
-//  async function getInput(){
-//  const data =await fetch('')
-//  data.res.json({});
+// measure tool
+async function addStateGeoJSONLayer(map) {
+    try {
+        const response = await fetch('https://raw.githubusercontent.com/geohacker/india/master/state/india_telengana.geojson');
+        const geoJsonData = await response.json();
+        
+        const vectorSource = new ol.source.Vector({
+            features: new ol.format.GeoJSON().readFeatures(geoJsonData, {
+                dataProjection: 'EPSG:4326', // Assuming the GeoJSON data is in EPSG:4326 (WGS84)
+                featureProjection: 'EPSG:3857' // The projection of your map
+            })
+        });
+
+        const dataLayer = new ol.layer.Vector({
+            source: vectorSource,
+            visible: false,
+            title: 'India States'
+        });
+
+        map.addLayer(dataLayer);
+    } catch (error) {
+        console.error('Error fetching or processing GeoJSON data:', error);
+    }
+}
+
+// Assuming `map` is already defined as your OpenLayers map object
+addStateGeoJSONLayer(map);
+
+async function addDistrictGeoJSONLayer(map) {
+    try {
+        // Reliable source for India's districts GeoJSON data
+        const response = await fetch('https://raw.githubusercontent.com/geohacker/india/master/district/india_district.geojson');
+        const geoJsonData = await response.json();
+        
+        const vectorSource = new ol.source.Vector({
+            features: new ol.format.GeoJSON().readFeatures(geoJsonData, {
+                dataProjection: 'EPSG:4326', // Assuming the GeoJSON data is in EPSG:4326 (WGS84)
+                featureProjection: 'EPSG:3857' // The projection of your map
+            })
+        });
+
+        const dataLayer = new ol.layer.Vector({
+            source: vectorSource,
+            visible: false,
+            title: 'India Districts'
+        });
+
+        map.addLayer(dataLayer);
+    } catch (error) {
+        console.error('Error fetching or processing GeoJSON data:', error);
+    }
+}
+
+// Assuming `map` is already defined as your OpenLayers map object
+addDistrictGeoJSONLayer(map);
+
+// async function addGeoJSONLayer(map) {
+//     try {
+//         const response = await fetch('http://localhost:3000/geojson'); // Correct URL without extra space
+//         const jsonData = await response.json();
+
+//         // Log the data structure
+//         console.log('Received data:', jsonData);
+
+//         // Ensure jsonData is in the correct format
+//         if (jsonData && jsonData.features) {
+//             // Initialize a vector source
+//             const vectorSource = new ol.source.Vector();
+
+//             // Convert to OpenLayers features
+//             const format = new ol.format.GeoJSON();
+//             const features = format.readFeatures(jsonData, {
+//                 dataProjection: 'EPSG:4326',
+//                 featureProjection: 'EPSG:3857'
+//             });
+
+//             // Add each feature to the vector source
+//             features.forEach(feature => {
+//                 vectorSource.addFeature(feature);
+//             });
+
+//             // Create a vector layer
+//             const dataLayer = new ol.layer.Vector({
+//                 source: vectorSource,
+//                 visible: true,
+//                 title: 'Features'
+//             });
+
+//             // Add the layer to the map
+//             map.addLayer(dataLayer);
+//         } else {
+//             console.error('Unexpected data format:', jsonData);
+//         }
+        
+//     } catch (error) {
+//         console.error('Error fetching or processing GeoJSON data:', error);
+//     }
 // }
- 
- 
- 
+
+// addGeoJSONLayer(map);
+// const data = new ol.layer.Vector({
+//     source: new ol.source.Vector({
+//         url: ' http://localhost:3000/geojson',
+//         format: new ol.format.GeoJSON()
+//     }),
+//     visible: true,
+//     title: 'data'
+// });
+
+// map.addLayer(data);
 
 
 
-   
+}

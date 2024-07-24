@@ -1,476 +1,1332 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/x-icon" href="https://openlayers.org/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Using OpenLayers with Vite</title>
-    <link rel="stylesheet" href="./style.css">
-     
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <!-- <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'> -->
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/x-icon" href="https://openlayers.org/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Using OpenLayers with Vite</title>
+  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="./libs/v9.2.4-package/ol.css">
 
-    <style>
-        .category {
-            overflow-y: auto;
-            max-height: 400px;
-        }
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <!-- <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'> -->
 
-        .category div:hover {
-            background-color: rgb(218, 210, 210);
-        }
+  <style>
+    .category {
+      overflow-y: auto;
+      max-height: 400px;
+    }
 
-        .heading img {
-            width: 80px;
-            height: 80px;
-            margin: 18px;
-        }
+    .category div:hover {
+      background-color: rgb(218, 210, 210);
+    }
 
-        .hidden {
-            display: none;
-        }
+    .heading img {
+      width: 80px;
+      height: 80px;
+      margin: 18px;
+    }
 
-        .expanded {
-            width: 100%;
-            height: 100%;
-        }
+    .hidden {
+      display: none;
+    }
 
-        .table-container {
-            position: absolute;
-            bottom: 10px;
-            right: 10px;
-            background-color: white;
-            border: 1px solid black;
-            z-index: 2;
-            max-height: 200px;
-            /* overflow-y: auto;
+    .expanded {
+      width: 100%;
+      height: 100%;
+    }
+
+    .table-container {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      background-color: white;
+      border: 1px solid black;
+      z-index: 2;
+      max-height: 200px;
+      /* overflow-y: auto;
             overflow-x: auto; */
-            display: none;
-        }
-    </style>
+      display: none;
+    }
+  </style>
 </head>
+
 <body>
-    <div class="main">
-        <div class="sidebar">
-            <div class="heading">
-                <img src="./logo/logo1.jpg" alt="">
-                <div>
-                    <h1>Nagar Nigam Lucknow</h1>
-                    <p>Government Of Uttar Pradesh</p>
-                </div>
-                <img src="./logo/logo2.png" alt="">
-            </div>
-            <div>
-                <div class="state-info" style="font-weight: 600; font-size: larger; color: black;">State: distance in km</div>
-                <div class="last-updated" style="display: flex; justify-content: space-between;">
-                    <div>Last Updated On</div>
-                    <div id="update" style="display: flex; justify-content: space-between; gap: 5px; " >
-                         
-                      <button id="refres-btn" onclick="updateDateAndTime()"><i class="fa-solid fa-arrows-rotate"></i></button>
-                    </div>
-                </div>
-                <div class="section-title" style="text-align: start;">
-                    <ul>
-                        <li class="dropdown-container">
-                          <a href="#" class="dropdown-trigger">
-                            PWD ROADS
-                            <span >
-                              <i class="fas fa-caret-down"></i>
-                            </span>
-                          </a>
-                          <div class="dropdown-menu">
-                            <ul id="dropdown-links">
-                              <!-- Dynamically add list items here -->
-                            </ul>
-                          </div>
-                        </li>
-                      </ul>
-                        
-                    
-                </div>
-                <div class="category">
-                    <div class="category-item" style="color: red;">RENEWAL</div>
-                    <div class="category-item" style="color: rgb(33, 233, 113);">WIDTH</div>
-                    <div class="category-item" style="color: rgb(5, 69, 206);">THICKNESS</div>
-                    <div class="category-item" style="color: rgb(242, 218, 63);">SURFACE TYPE</div>
-                    <div class="category-item" style="color: rgb(111, 22, 199);">DIVISION</div>
-                </div>
-                <div class="section-title" style="text-align: start; display: flex; justify-content: space-between;">BRIDGES
-                  <i class="fa-solid fa-caret-up" ></i>
-                </div>
-                <div class="section-title" style="text-align: start;">PWD ROAD DIGITIZATION STATUS</div>
-            </div>
-        </div>
-        <!-- sidebar 2 -->
-        <i class="bx bx-menu" id="menu-icon" onclick="togglesidebar()"> </i>
-        
-        <div class="sidebar2">
-          <div class="heading">
-            <img src="./logo/logo1.jpg" alt="">
-            <div>
-                <h1>Nagar Nigam Lucknow</h1>
-                <p>Government Of Uttar Pradesh</p>
-            </div>
-            <img src="./logo/logo2.png" alt="">
-        </div>
+  <div class="main">
+    <div class="sidebar">
+      <div class="heading">
+        <img src="./logo/logo1.jpg" alt="">
         <div>
-            <div class="state-info" >State: distance in km</div>
-            <div class="last-updated" style="display: flex; justify-content: space-between;">
-                <div>Last Updated On</div>
-                <div id="update" style="display: flex; justify-content: space-between; gap: 5px; " >
-                     
-                  <button id="refres-btn" onclick="updateDateAndTime()"><i class="fa-solid fa-arrows-rotate"></i></button>
-                </div>
-            </div>
-            <div class="section-title"> PWD ROADS
-           
-                
-            </div>
-            <div class="category">
-                <div class="category-item" style="color: red;">RENEWAL</div>
-                <div class="category-item" style="color: rgb(33, 233, 113);">WIDTH</div>
-                <div class="category-item" style="color: rgb(5, 69, 206);">THICKNESS</div>
-                <div class="category-item" style="color: rgb(242, 218, 63);">SURFACE TYPE</div>
-                <div class="category-item" style="color: rgb(111, 22, 199);">DIVISION</div>
-            </div>
-            <div class="section-title">
-              <ul>
-                <li class="dropdown-container-1">
-                  <a href="#" class="dropdown-trigger-1">
-                    BRIDGES
-                    <span >
-                      <i class="fas fa-caret-down"></i>
-                    </span>
-                  </a>
-                  <div class="dropdown-menu-1">
-                    <ul id="dropdown-links-1">
-                      <!-- Dynamically add list items here -->
-                    </ul>
-                  </div>
-                </li>
-              </ul>
-                 
-            </div>
-            <div class="section-title">PWD ROAD DIGITIZATION STATUS</div>
+          <h1>Nagar Nigam Lucknow</h1>
+          <p>Government Of Uttar Pradesh</p>
         </div>
-        </div>
-        
-           
-            <!-- <a class="skiplink" href="#map"></a> -->
-            <div id="map" class="map" tabindex="0" style="display:flex; background-size: cover; justify-content:space-between; flex-wrap: wrap; flex-direction: column; "  >
-               
-              <button id="toggle-sidebar"   style= "width: 30px; height: 30px; margin: 1px; padding: 3px; border-radius: 4px;">
-                <i class="fa-solid fa-caret-up"></i></button>
-                <a  id="toggle-text" href="" style="margin: -5px; padding: 2px; text-decoration: none; color: black;">Full Extent</a>
+        <img src="./logo/logo2.png" alt="">
+      </div>
+      <div>
+        <div class="state-info" style="font-weight: 600; font-size: larger; color: black;">State: distance in km</div>
+        <div class="last-updated" style="display: flex; justify-content: space-between;">
+          <div>Last Updated On</div>
+          <div id="update" style="display: flex; justify-content: space-between; gap: 5px; ">
 
-              <button id="search-btn" onclick="searchClick()" style= "width: 40px; height: 40px; margin: 1px; padding: 3px;    border: \px solid white; border-radius: 24px; background-color: black; color: aliceblue;">
-                <i class="fa-solid fa-magnifying-glass"></i>
+            <button id="refres-btn" onclick="updateDateAndTime()"><i class="fa-solid fa-arrows-rotate"></i></button>
+          </div>
+        </div>
+        <div class="section-title" style="text-align: start;"> PWD ROADS
+        </div>
+        <div class="category">
+          <div class="category-item" style="color: red;">RENEWAL</div>
+          <div class="category-item" style="color: rgb(33, 233, 113);">WIDTH</div>
+          <div class="category-item" style="color: rgb(5, 69, 206);">THICKNESS</div>
+          <div class="category-item" style="color: rgb(242, 218, 63);">SURFACE TYPE</div>
+          <div class="category-item" style="color: rgb(111, 22, 199);">DIVISION</div>
+        </div>
+        <div class="section-title" style="text-align: start; display: flex; justify-content: space-between;">
+          <div style="display: flex; justify-content: space-between; gap: 16em;">
+            <div>BRIDGES</div>
+            <div class="bridge-dropdown" style="z-index: 1; ">
+              <button id="bridge-dropdown-input-btn" onclick="openBridgeDropdown()" style=" color: #fff;">
+
+                <i class="fa-solid fa-caret-down"></i>
+
               </button>
-              <a  id="search-text" href="" style="margin: -5px; padding: 2px; text-decoration: none; color: black;">Search
-                
-              </a>
-              
-              <button id="measurement-btn"  style= "width: 40px; height: 40px; margin: 1px; padding: 3px;  border: 2px solid white; border-radius: 24px; background-color: black; color: aliceblue;">
-                <i class="fa-solid fa-pencil"></i></button>
-                <a  id="measure-text" href="" style="margin: -5px; padding: 2px; text-decoration: none; color: black;">Measure</a>
+              <div class="bridge-dropdown-list" id="bridge-dropdown-list" style="top: -.7em; left: 4em;">
+                <ul class="bridge-dropdown-list-ul" id="bridge-dropdown-list-ul">
 
-              <button id="grid-btn"  style= "width: 40px; height: 40px; margin: 1px; padding: 3px;   border: 2px solid white; border-radius: 24px; background-color: black; color: aliceblue;">
-                <i class="fa-solid fa-border-all"></i></button>
-                <a  id="grid-text" href="" style="margin: -5px; padding: 2px; text-decoration: none; color: black;">Query Panel</a>
-
-              <button id="list-btn"  style= "width: 40px; height: 40px; margin: 1px; padding: 3px;     border: 2px solid white; border-radius: 24px; background-color: black; color: aliceblue;">
-              <i class="fa-regular fa-rectangle-list"></i></button>
-              <a  id="list-text" href="" style="margin: -5px; padding: 2px; text-decoration: none; color: black;">Layer List</a>
-              <a  id="zoom-in-text" href="" style="margin: -5px; padding: 2px; text-decoration: none; color: black;">Zoom In</a>
-              <a  id="zoom-out-text" href="" style="margin: -5px; padding: 2px; text-decoration: none; color: black;">Zoom Out</a>
-
-              
-              <div class="icon-btn">
-               
-                <button style= "width: 40px; height: 40px; margin: 1px; padding: 3px;   position: fixed; top:0; right: 10px; border: 2px solid white; border-radius: 24px; background-color: black; color: aliceblue; z-index: 1;">
-                  <i class="fa-solid fa-arrow-left"></i>
-                </button>
-                <button style= "width: 40px; height: 40px; margin: 1px; padding: 3px;   position: fixed; top:0; right: 60px; border: 2px solid white; border-radius: 24px; background-color: black; color: aliceblue; z-index: 1;">
-                  <i class="fa-solid fa-question"></i>
-                </button>
-               <div  id="search-input-div" style= "width: 30vw; height: 40px; margin: 10px; padding: 3px;   justify-content: space-between;  position: fixed; top:0; left: 35rem; border: 2px solid rgb(5, 0, 0); border-radius: 24px; background-color:white; color: rgb(4, 16, 27); z-index: 1;">
-                <input  id="search-input" type="text" name="search" placeholder="search" style="height: 35px; width: 27vw;  border: 2px solid white; border-radius: 24px; background-color: rgb(244, 244, 244); color: rgb(4, 16, 27); z-index: 1;" >
-                <ul id="search-input-dropdown"  style="height: 35px; width: 3vw;  border: 2px solid white; border-radius: 24px; background-color: rgb(244, 244, 244); color: rgb(4, 16, 27); z-index: 1;">
-                  <li class="dropdown-container">
-                    <a href="#" class="dropdown-trigger-2">
-                      
-                      <span >
-                        <i class="fas fa-caret-down"></i>
-                      </span>
-                    </a>
-                    <div class="dropdown-menu" style= "width: 22vw; height: 35vh; margin: 15px; padding: 3px; position: fixed; top:34px; left: 40rem; border: 2px solid rgb(5, 0, 0); border-radius: 24px; background-color:white; color: rgb(4, 16, 27); z-index: 1;">
-                      <ul class="dynamic-ul" id="dropdown-links-2" >
-                        <!-- Dynamically add list items here -->
-                      </ul>
-                    </div>
-                  </li>
                 </ul>
-              </input>
               </div>
-            
+            </div>
+
+          </div>
+        </div>
+        <div class="section-title" style="text-align: start;">PWD ROAD DIGITIZATION STATUS</div>
+      </div>
+    </div>
+    <!-- sidebar 2 -->
+    <i class="bx bx-menu" id="menu-icon" onclick="togglesidebar()"> </i>
+
+    <div class="sidebar2">
+      <div class="heading">
+        <img src="./logo/logo1.jpg" alt="">
+        <div>
+          <h1>Nagar Nigam Lucknow</h1>
+          <p>Government Of Uttar Pradesh</p>
+        </div>
+        <img src="./logo/logo2.png" alt="">
+      </div>
+      <div>
+        <div class="state-info">State: distance in km</div>
+        <div class="last-updated" style="display: flex; justify-content: space-between;">
+          <div>Last Updated On</div>
+          <div id="update" style="display: flex; justify-content: space-between; gap: 5px; ">
+
+            <button id="refres-btn" onclick="updateDateAndTime()"><i class="fa-solid fa-arrows-rotate"></i></button>
+          </div>
+        </div>
+        <div class="section-title">
+
+
+        </div>
+        <div class="category">
+          <div class="category-item" style="color: red;">RENEWAL</div>
+          <div class="category-item" style="color: rgb(33, 233, 113);">WIDTH</div>
+          <div class="category-item" style="color: rgb(5, 69, 206);">THICKNESS</div>
+          <div class="category-item" style="color: rgb(242, 218, 63);">SURFACE TYPE</div>
+          <div class="category-item" style="color: rgb(111, 22, 199);">DIVISION</div>
+        </div>
+        <div class="section-title">
+          BRIDGES
+        </div>
+        <div class="section-title">PWD ROAD DIGITIZATION STATUS</div>
+      </div>
+    </div>
+
+
+    <a class="skiplink" href="#map"></a>
+    <div id="map" class="map" tabindex="0"
+      style="display:flex; background-size: cover; justify-content:space-between; flex-wrap: wrap; flex-direction: column; ">
+
+
+      <a id="zoom-in-text" href="" style="margin: -5px; padding: 2px; text-decoration: none; color: black;"></a>
+      <a id="zoom-out-text" href="" style="margin: -5px; padding: 2px; text-decoration: none; color: black;"></a>
+
+    </div>
+    <div class="icon-btn">
+      <div id="left-buton">
+        <!--  toggle button start here -->
+
+        <button id="toggle-sidebar"
+          style="width: 40px; height: 40px; margin: 1px; padding: 3px;   position: fixed; top:0em; left: 30em; border: 2px solid white; border-radius: 5px; background-color: black; color: #fff; z-index: 1;">
+
+          <i id="toggle-icon" class="fa-solid fa-arrow-left-long"></i></button>
+        <a id="toggle-text" href=""
+          style="margin: -5px; padding: 2px; text-decoration: none; color: black; position: fixed; top:2.7em; left: 25.5em; z-index: 1;">Full
+          Extent</a>
+
+
+        <!--  toggle button end here -->
+
+
+        <!--  search button start here -->
+        <button id="search-btn" onclick="searchClick()"
+          style="width: 40px; height: 40px; margin: 1px; padding: 3px;   position: fixed; top:5em; left: 30em; border: 2px solid white; border-radius: 24px; background-color: black; color: aliceblue; z-index: 1;">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+        <a id="search-text" href=""
+          style="margin: -5px; padding: 2px; text-decoration: none; color: black; position: fixed; top:7em; left: 25.5em; z-index: 1;">Search
+        </a>
+        <!--  search button end here -->
+
+
+
+        <!-- measure button start here -->
+        <button id="measurement-btn" onclick="measureClick()"
+          style="width: 40px; height: 40px; margin: 1px; padding: 3px;   position: fixed; top:10em; left: 30em; border: 2px solid white; border-radius: 24px; background-color: black; color: aliceblue; z-index: 1;">
+          <i class="fa-solid fa-pencil"></i></button>
+        <a id="measure-text" href=""
+          style="margin: -5px; padding: 2px; text-decoration: none; color: black;  position: fixed; top:11em; left: 25.5em; z-index: 1;">Measure</a>
+        <div id="measure-box"
+          style="display: none; background-color: blue; width: 25vw; height: 205px; margin: 10px; padding: 3px;   justify-content: space-between;  position: fixed; top:155px; left: 30vw; border: 2px solid rgb(5, 0, 0); border-radius: 2px;  color: rgb(4, 16, 27); z-index: 1;">
+          <div>
+
+            <div class="measure-box-header">Measure Option </div>
+
+            <div class="measure-div-list-box" style="display: flex; justify-content: space-between;">
+
+              <!--  measure  box list -->
+              <div id="attribute-box" class="attribute-box" style="display: block; ">
+
+                <div class="measure-box-list">
+                  <div>
+                    <form>
+                      <label for="type"> &nbsp;</label>
+                      <select id="type">
+                        <option value="length">Length (LineString)</option>
+                        <option value="area">Area (Polygon)</option>
+                      </select>
+                    </form>
+                  </div>
+
+                </div>
+
+
+
+
               </div>
 
-              
+
             </div>
-             
-            <button id="show-table" class="btn">table</button>
-            <div id="table-container" class="table-container">
-              <div style="display: flex; flex-direction: column; ">
-                <div style="  background-color: aquamarine;"></div>
-                <div class="tbl"  >
-         
-                      
-             
-             <table class="lower-table" style="width: 98vw; align-items: center;"><nav style="position: sticky;">
+          </div>
+        </div>
+        <!-- measure button end here-->
+
+
+        <!-- query-pannel button start here -->
+        <button id="grid-btn" onclick="queryClick()"
+          style="width: 40px; height: 40px; margin: 1px; padding: 3px;   position: fixed; top:15em; left: 30em; border: 2px solid white; border-radius: 24px; background-color: black; color: aliceblue; z-index: 1;">
+          <i class="fa-solid fa-border-all"></i></button>
+        <a id="grid-text" href=""
+          style="margin: -5px; padding: 2px; text-decoration: none; color: black;  position: fixed; top:15.2em; left: 25.5em; z-index: 1;">Query
+          Panel</a>
+        <div id="query-box"
+          style="display: none; background-color: blue; width: 25vw; height: 450px; margin: 10px; padding: 3px;   justify-content: space-between;  position: fixed; top:230px; left: 30vw; border: 2px solid rgb(5, 0, 0); border-radius: 2px;  color: rgb(4, 16, 27); z-index: 1;">
+          <div>
+            <div class="query-pannel-header" id="query-pannel-header">
+              <ul class="query-pannel-header-ul"
+                style="display: flex; height: 2em; font-size: medium; justify-content: space-around; list-style-type: none;">
+                <button id="header-road-button" onclick="roadClick()">Road</button>
+                <button id="header-drain-button" onclick="drainClick()">Drain</button>
+                <button id="header-other-bitton" onclick="otherClick()">Other</button>
+
+              </ul>
+            </div>
+            <div id="road-button" style="display: block;">
+              <div class="query-pannel-button"
+                style="display: flex; height: 40px; justify-content: space-between; color: #fff;  border-top: 2px solid #fff; border-bottom: 2px solid #fff;">
+                <button id="attribute-btn" onclick="attributeSwitch1()">select by road attribute</button>
+                <button id="draw-btn" onclick="drawSwitch1()">select by road draw</button>
+              </div>
+
+              <div class="div-box-1" style="display: flex; justify-content: space-between;">
+
+                <!-- button 2 box -->
+                <div id="draw-box1" class="draw-box" style="display: none; ">
+
+                  <div class="draw-box-list">
+                    <div>
+                      select by road Layer
+                    </div>
+
+                  </div>
+
+                  <div class="draw-box-list">
+                    <div>
+                      select by road Shape
+                    </div>
+
+                  </div>
+                  <div class="query-pannel-submit" style="display: flex;  flex-direction: column; ">
+                    <label for="" style="color: #fff; font-size: larger;"> Enter value</label>
+                    <input type="text" placeholder="">
+                  </div>
+
+                  <button
+                    style="margin: 14px; height: 35px; width: 10vw; background-color: rgb(230, 31, 230); font-size: medium; border: 0; color: #fff;">Load
+                    Layer</button>
+
+                </div>
+                <!-- button 2 box -->
+                <div id="attribute-box1" class="attribute-box" style="display: block;  ">
+                  <div class="attribute-box-list">
+                    <div>
+                      select by road layer
+                    </div>
+
+                  </div>
+                  <div class="attribute-box-list">
+                    <div>
+                      select by road attribute
+                    </div>
+
+                  </div>
+
+                  <div class="attribute-box-list">
+                    <div>
+                      select by road attribute
+                    </div>
+
+                  </div>
+                  <div class="query-pannel-submit" style="display: flex;  flex-direction: column; ">
+                    <label for="" style="color: #fff; font-size: larger;"> Enter value</label>
+                    <input type="text" placeholder="">
+                  </div>
+
+                  <button
+                    style="font-size: medium; margin: 14px; height: 35px; width: 10vw; background-color: rgb(230, 31, 230); border: 0; color: #fff;">Load
+                    Layer</button>
+
+                </div>
+
+
+
+
+              </div>
+            </div>
+            <div id="drain-button" style="display: none;">
+              <div class="query-pannel-button"
+                style="display: flex; height: 40px; justify-content: space-between; color: #fff;  border-top: 2px solid #fff; border-bottom: 2px solid #fff;">
+                <button id="attribute-btn" onclick="attributeSwitch2()">select by drain attribute</button>
+                <button id="draw-btn" onclick="drawSwitch2()">select by drain draw</button>
+              </div>
+
+              <div class="div-box-2" style="display: flex; justify-content: space-between;">
+
+                <!-- button 1 box -->
+                <div id="attribute-box2" class="attribute-box" style="display: block; ">
+                  <div class="attribute-box-list">
+                    <div>
+                      select by drain layer
+                    </div>
+
+                  </div>
+                  <div class="attribute-box-list">
+                    <div>
+                      select by drain attribute
+                    </div>
+
+                  </div>
+
+                  <div class="attribute-box-list">
+                    <div>
+                      select by drain attribute
+                    </div>
+
+                  </div>
+                  <div class="query-pannel-submit" style="display: flex;  flex-direction: column; ">
+                    <label for="" style="color: #fff; font-size: larger;"> Enter value</label>
+                    <input type="text" placeholder="">
+                  </div>
+
+                  <button
+                    style="font-size: medium; margin: 14px; height: 35px; width: 10vw; background-color: rgb(230, 31, 230); border: 0; color: #fff;">Load
+                    Layer</button>
+
+                </div>
+                <!-- button 2 box -->
+                <div id="draw-box2" class="draw-box" style="display: none; ">
+
+                  <div class="draw-box-list">
+                    <div>
+                      select by drain Layer
+                    </div>
+
+                  </div>
+
+                  <div class="draw-box-list">
+                    <div>
+                      select by drain Shape
+                    </div>
+
+                  </div>
+                  <div class="query-pannel-submit" style="display: flex;  flex-direction: column; ">
+                    <label for="" style="color: #fff; font-size: larger;"> Enter value</label>
+                    <input type="text" placeholder="">
+                  </div>
+
+                  <button
+                    style="margin: 14px; height: 35px; width: 10vw; background-color: rgb(230, 31, 230); font-size: medium; border: 0; color: #fff;">Load
+                    Layer</button>
+
+                </div>
+
+              </div>
+            </div>
+            <div id="other-button" style="display: none;">
+              <div class="query-pannel-button"
+                style="display: flex; height: 40px; justify-content: space-between; color: #fff;  border-top: 2px solid #fff; border-bottom: 2px solid #fff;">
+                <button id="attribute-btn" onclick="attributeSwitch3()">select by other attr.</button>
+                <button id="draw-btn" onclick="drawSwitch3()">select by other draw</button>
+              </div>
+
+              <div class="div-box-3" style="display: flex; justify-content: space-between;">
+
+                <!-- button 1 box -->
+                <div id="draw-box3" class="draw-box" style="display: none; ">
+
+                  <div class="draw-box-list">
+                    <div>
+                      select by other Layer
+                    </div>
+
+                  </div>
+
+                  <div class="draw-box-list">
+                    <div>
+                      select by other Shape
+                    </div>
+
+                  </div>
+                  <div class="query-pannel-submit" style="display: flex;  flex-direction: column; ">
+                    <label for="" style="color: #fff; font-size: larger;"> Enter value</label>
+                    <input type="text" placeholder="">
+                  </div>
+
+                  <button
+                    style="margin: 14px; height: 35px; width: 10vw; background-color: rgb(230, 31, 230); font-size: medium; border: 0; color: #fff;">Load
+                    Layer</button>
+
+                </div>
+                <!-- button 2 box -->
+                <div id="attribute-box3" class="attribute-box" style="display: block; ">
+                  <div class="attribute-box-list">
+                    <div>
+                      select by other layer
+                    </div>
+
+                  </div>
+                  <div class="attribute-box-list">
+                    <div>
+                      select by other attribute
+                    </div>
+
+                  </div>
+
+                  <div class="attribute-box-list">
+                    <div>
+                      select by other attribute
+                    </div>
+
+                  </div>
+                  <div class="query-pannel-submit" style="display: flex;  flex-direction: column; ">
+                    <label for="" style="color: #fff; font-size: larger;"> Enter value</label>
+                    <input type="text" placeholder="">
+                  </div>
+
+                  <button
+                    style="font-size: medium; margin: 14px; height: 35px; width: 10vw; background-color: rgb(230, 31, 230); border: 0; color: #fff;">Load
+                    Layer</button>
+
+                </div>
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- query-pannel button end here -->
+
+
+
+        <!-- layer list button start here -->
+
+        <button id="list-btn" onclick="listClick()"
+          style="width: 40px; height: 40px; margin: 1px; padding: 3px;   position: fixed; top:20em; left: 30em; border: 2px solid white; border-radius: 24px; background-color: black; color: aliceblue; z-index: 1;">
+          <i class="fa-regular fa-rectangle-list"></i></button>
+        <a id="list-text" href=""
+          style="margin: -5px; padding: 2px; text-decoration: none; color: black;  position: fixed; top:19.5em; left: 25.5em; z-index: 1;">Layer
+          List</a>
+        <div id="layer-box"
+          style=" display: none; background-color: blue; width: 25vw; height: 270px; margin: 10px; padding: 3px;   justify-content: space-between;  position: fixed; top:300px; left: 30vw; border: 2px solid rgb(5, 0, 0); border-radius: 2px;  color: rgb(4, 16, 27); z-index: 1;">
+          <div>
+            <div class="layer-header" id="query-pannel-header">
+              Layer List
+            </div>
+
+
+            <div class="div-box" style="display: flex; justify-content: space-between;">
+
+              <!-- button 1 box -->
+              <div id="layer-box" class="layer-box" style="display: block; ">
+                <div class="layer-box-list">
+                  <div>
+                    select layer
+                  </div>
+
+                </div>
+
+
+
+                <div class="layer-submit" style="display: flex;  flex-direction: column; ">
+                  <label for="" style="color: #fff; font-size: larger;"> Enter value</label>
+                  <input type="text" placeholder="">
+                </div>
+
+                <button
+                  style="font-size: medium; margin: 14px; height: 35px; width: 10vw; background-color: rgb(230, 31, 230); border: 0; color: #fff;">Load
+                  Layer</button>
+
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+        <!-- layer list button end here -->
+
+      </div>
+
+
+
+
+
+      <!--          arrow button top right corner  start here-->
+      <button
+        style="width: 40px; height: 40px; margin: 1px; padding: 3px;   position: fixed; top:1.3em; right: 1em; border: 2px solid white; border-radius: 24px; background-color: black; color: aliceblue; z-index: 1;">
+        <i class="fa-solid fa-arrow-left"></i>
+      </button>
+      <!--          arrow button top right corner end here -->
+
+
+
+      <!--          map-layer button top right corner  start hare-->
+
+      <button id="layer-button" onclick="layerClick()"
+        style="width: 40px; height: 40px; margin: 1px; padding: 3px;   position: fixed; top:5em; right: 1em; border: 2px solid white; border-radius: 24px; background-color: black; color: aliceblue; z-index: 1;">
+        <i class="fa-solid fa-layer-group"></i>
+      </button>
+      <!--          map-layer button top right corner  start hare-->
+      <!-- layer div start here -->
+      <div class="map-layer-div" id="map-layer-div"
+        style=" display: none; width: 12vw; height: 12em; margin: 0px; padding: 15px; justify-content: space-between; position: fixed; top: 5em; right: 3.4em; border: 2px solid rgb(5, 0, 0); border-radius: 7px; background-color: white; color: rgb(4, 16, 27); z-index: 1;">
+
+        <div id="map-layer" class="map-layer">
+          <h2>base layera</h2>
+          <input type="radio" name="baseLayerRadioButton" value="OSMStandard" checked>OSMStandard<br>
+          <input type="radio" name="baseLayerRadioButton" value="OSMHumanitarian">OSMHumanitarian<br>
+          <input type="radio" name="baseLayerRadioButton" value="CartoDBPositron">CartoDBPositron<br>
+          <input type="radio" name="baseLayerRadioButton" value="BingSatellite">BingSatellite<br>
+        </div>
+      </div>
+      <!-- layer div end here -->
+
+      <!--          search input section button top  start here-->
+
+      <div id="search-input-div" id="search-input-div"
+        style=" display: none; width: 30vw; height: 40px; margin: 10px; padding: 3px; justify-content: space-between; position: fixed; top: 0; left: 35rem; border: 2px solid rgb(5, 0, 0); border-radius: 24px; background-color: white; color: rgb(4, 16, 27); z-index: 1;">
+        <input id="search-input" type="text" name="search" placeholder="Search"
+          style=" font-size: x-large; height: 35px; padding-inline-start:40px ; width: 25vw; border: 0; outline: 0; border-radius: 24px; background-color: rgb(244, 244, 244); color: rgb(4, 16, 27); z-index: 1;">
+        <button class="search-input-button" id="search-input-button"
+          style="background: transparent;  align-items: center; height: 30px; width: 30px; border: 0; outline: 0;">
+          <a href="" id="search-input-button-a">
+            <i class=" fa-solid fa-magnifying-glass"></i>
+          </a>
+        </button>
+        <div class="search-dropdown" style="z-index: 1;">
+          <button id="search-dropdown-input-btn" onclick="openDropdown()">
+
+            <i class="fa-solid fa-caret-down"></i>
+
+          </button>
+          <div class="search-dropdown-list" id="search-dropdown-list">
+            <ul class="search-dropdown-list-ul" id="search-dropdown-list-ul">
+
+            </ul>
+          </div>
+        </div>
+        <div class="result-box"
+          style="width: 26vw; overflow-y: scroll; max-height: 408px; margin: 10px; padding: 3px; justify-content: space-between; position: fixed; top: 41px; left: 35rem; border: 2px solid #fff; border-radius: 8px; background-color: white; color: rgb(4, 16, 27); z-index: 1; display: none;">
+        </div>
+      </div>
+      <!--          search input section button top  end here-->
+
+
+    </div>
+
+    <button id="show-table" class="btn">table</button>
+    <div id="table-container" class="table-container">
+      <div style="display: flex; flex-direction: column; ">
+        <div style="  background-color: aquamarine;"></div>
+        <div class="tbl">
+
+
+
+          <table class="lower-table" style="width: 98vw; align-items: center;">
+            <nav style="position: sticky;">
               <div class="navbar">
-                  <ul class="nav-left">
-                      <a href="#"  >Summary</a>
-                      <a href="#">zone</a>
-                      <a href="#">Circle</a>
-                      <a href="#">District</a>
-                      
-                  </ul>
-                  <ul class="nav-right">
-                      
-                     
-                      <a href="">Disclaimer</a>
-                      <a href=""  id="minimizeIcon" onclick="minimizeWindow()"><i class="fa-solid fa-minus"></i></a>
-                      <a href="" id="download"><i class="fa-solid fa-circle-down"></i></a>
-                      <a href="" id="restoreIcon"> <i class="fa-solid fa-minimize"></i></a>
-                      <a href="" id="close" onclick="closeWindow()">  <i class="fa-solid fa-xmark"></i></a>
-                     
-                    
-                      
-                  </ul>
+                <ul class="nav-left">
+                  <a href="#" id="summary-link">Summary</a>
+                  <a href="#" id="zone-link">zone</a>
+                  <a href="#" id="road-link">Road</a>
+                  <a href="#" id="ward-link">ward</a>
+                  <a href="#" id="view-link">view</a>
+
+                </ul>
+                <ul class="nav-right">
+
+
+                  <a href="">Disclaimer</a>
+                  <a href="" id="minimizeIcon" onclick="minimizeWindow()"><i class="fa-solid fa-minus"></i></a>
+                  <a href="" id="download"><i class="fa-solid fa-circle-down"></i></a>
+                  <a href="" id="restoreIcon"> <i class="fa-solid fa-minimize"></i></a>
+                  <a href="" id="close" onclick="closeWindow()"> <i class="fa-solid fa-xmark"></i></a>
+
+
+
+                </ul>
               </div>
               <div></div>
-          </nav>
+            </nav>
+            <!-- summary table -->
+            <table id="summary" style="display: block;">
               <thead style="border-collapse: collapse; align-items: center;">
-                <tr >
-                    <th rowspan="2"><input type="checkbox">Road Type</th>
-                    <th rowspan="2">Unique Roads (GIS)</th>
-                    <th colspan="3"   >
-                        District wise Roads
-                       
-                    </th>
-                    <th rowspan="2">Work Proposals</th>
-                    <th colspan="2"  >Total Stretches</th>
-                    <th colspan="2">Overdue for Renewal</th>
-                    <th >Renewal Due in 0 yr (FY 24-25)</th>
+                <tr>
+                  <th rowspan="2"><input type="checkbox">Road Type</th>
+                  <th rowspan="2">Unique Roads (GIS)</th>
+                  <th colspan="3">
+                    District wise Roads
+
+                  </th>
+                  <th rowspan="2">Work Proposals</th>
+                  <th colspan="2">Total Stretches</th>
+                  <th colspan="2">Overdue for Renewal</th>
+                  <th>Renewal Due in 0 yr (FY 24-25)</th>
                 </tr>
                 <tr>
-                     
-                    <th>Count</th>
-                    <th>Length(km)</th>
-                    <th>Target count</th>
-                     
-                    <th>No.</th>
-                    <th>Length(km)</th>
-                    <th>Streaches/No.</th>
-                    <th>Length(km)</th>
-                    <th>Streaches/No.</th>
+
+                  <th>Count</th>
+                  <th>Length(km)</th>
+                  <th>Target count</th>
+
+                  <th>No.</th>
+                  <th>Length(km)</th>
+                  <th>Streaches/No.</th>
+                  <th>Length(km)</th>
+                  <th>Streaches/No.</th>
                 </tr>
-            </thead>
-           <tbody class="subcolomn" style="color: blueviolet; text-align: center;"  >
-            <tr >
-              <td><input type="checkbox" style="color: blue;"> National Highway</td>
-              <td style="color: blue;">49</td>
-              <td style="color: blue;">115</td>
-              <td style="color: blue;" >4591.91</td>
-              <td style="color: blue;">115</td>
-              <td>0</td>
-              <td>0</td>
-              <td>0.0</td>
-              
-              <td>NA</td>
-              <td>NA</td>
-              <td>NA</td>
-          </tr>
-          <tr>
-              <td><input type="checkbox" style="color: blue;"> National Highway</td>
-              <td style="color: blue;">49</td>
-              <td style="color: blue;">115</td>
-              <td style="color: blue;">4591.91</td>
-              <td>115</td>
-              <td>0</td>
-              <td>0</td>
-              <td>0.0</td>
-              
-              <td>NA</td>
-              <td>NA</td>
-              <td>NA</td>
-          </tr>
-          <tr>
-              <td><input type="checkbox" style="color: blue;"> State Highway</td>
-              <td style="color: blue;">49</td>
-              <td style="color: blue;">115</td>
-              <td style="color: blue;">4591.91</td>
-              <td>115</td>
-              <td>0</td>
-              <td>0</td>
-              <td>0.0</td>
-               
-              <td>NA</td>
-              <td>NA</td>
-              <td>NA</td>
-          </tr>
-          <tr>
-              <td> <input type="checkbox" style="color: blue;"> Major District</td>
-              <td style="color: blue;">49</td>
-              <td style="color: blue;">115</td>
-              <td style="color: blue;">4591.91</td>
-              <td>115</td>
-              <td>0</td>
-              <td>0</td>
-              <td>0.0</td>
-               
-              <td>NA</td>
-              <td>NA</td>
-              <td>NA</td>
-          </tr>
-          <tr>
-              <td><input type="checkbox" style="color: blue;"> National Highway</td>
-              <td style="color: blue;">49</td>
-              <td style="color: blue;">115</td>
-              <td style="color: blue;">4591.91</td>
-              <td>115</td>
-              <td>0</td>
-              <td>0</td>
-              <td>0.0</td>
-               
-              <td>NA</td>
-              <td>NA</td>
-              <td>NA</td>
-          </tr>
-           </tbody>
-                   </table>
-                </div>
-         </div>
-            </div>
-         
+              </thead>
+              <tbody class="subcolomn" style="color: blueviolet; text-align: center;">
+                <tr>
+                  <td><input type="checkbox" style="color: blue;"> National Highway</td>
+                  <td style="color: blue;">49</td>
+                  <td style="color: blue;">115</td>
+                  <td style="color: blue;">4591.91</td>
+                  <td style="color: blue;">115</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0.0</td>
+
+                  <td>NA</td>
+                  <td>NA</td>
+                  <td>NA</td>
+                </tr>
+                <tr>
+                  <td><input type="checkbox" style="color: blue;"> National Highway</td>
+                  <td style="color: blue;">49</td>
+                  <td style="color: blue;">115</td>
+                  <td style="color: blue;">4591.91</td>
+                  <td>115</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0.0</td>
+
+                  <td>NA</td>
+                  <td>NA</td>
+                  <td>NA</td>
+                </tr>
+                <tr>
+                  <td><input type="checkbox" style="color: blue;"> State Highway</td>
+                  <td style="color: blue;">49</td>
+                  <td style="color: blue;">115</td>
+                  <td style="color: blue;">4591.91</td>
+                  <td>115</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0.0</td>
+
+                  <td>NA</td>
+                  <td>NA</td>
+                  <td>NA</td>
+                </tr>
+                <tr>
+                  <td> <input type="checkbox" style="color: blue;"> Major District</td>
+                  <td style="color: blue;">49</td>
+                  <td style="color: blue;">115</td>
+                  <td style="color: blue;">4591.91</td>
+                  <td>115</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0.0</td>
+
+                  <td>NA</td>
+                  <td>NA</td>
+                  <td>NA</td>
+                </tr>
+                <tr>
+                  <td><input type="checkbox" style="color: blue;"> National Highway</td>
+                  <td style="color: blue;">49</td>
+                  <td style="color: blue;">115</td>
+                  <td style="color: blue;">4591.91</td>
+                  <td>115</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0.0</td>
+
+                  <td>NA</td>
+                  <td>NA</td>
+                  <td>NA</td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- zone table -->
+            <table id="zone" style="display:none;">
+              <thead style=" align-items: center;">
+                <tr>
+                  <th rowspan="2"><input type="checkbox">Zone Type</th>
+                  <th rowspan="2">Unique Zone (GIS)</th>
+                  <th colspan="3">
+                    District wise Zone
+
+                  </th>
+
+                  <th colspan="2">Total Stretches</th>
+                  <th colspan="2">Overdue for Renewal</th>
+                  <th>Renewal Due in 0 yr (FY 24-25)</th>
+                </tr>
+                <tr>
+
+                  <th>Count</th>
+                  <th>Length(km)</th>
+                  <th>Target count</th>
+
+                  <th>No.</th>
+                  <th>Length(km)</th>
+                  <th>Streaches/No.</th>
+                  <th>Length(km)</th>
+                  <th>Streaches/No.</th>
+                </tr>
+              </thead>
+              <tbody class="subcolomn" style="color: blueviolet; text-align: center;">
+                <tr>
+                  <td><input type="checkbox" style="color: blue;"> Road1</td>
+                  <td style="color: blue;">49</td>
+                  <td style="color: blue;">115</td>
+                  <td style="color: blue;">4591.91</td>
+                  <td style="color: blue;">115</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0.0</td>
+
+                  <td>NA</td>
+                  <td>NA</td>
+
+                </tr>
+                <tr>
+                  <td><input type="checkbox" style="color: blue;"> Road2</td>
+                  <td style="color: blue;">49</td>
+                  <td style="color: blue;">115</td>
+                  <td style="color: blue;">4591.91</td>
+                  <td>115</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0.0</td>
+
+                  <td>NA</td>
+                  <td>NA</td>
+
+                </tr>
+                <tr>
+                  <td><input type="checkbox" style="color: blue;"> Road3</td>
+                  <td style="color: blue;">49</td>
+                  <td style="color: blue;">115</td>
+                  <td style="color: blue;">4591.91</td>
+                  <td>115</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0.0</td>
+
+                  <td>NA</td>
+                  <td>NA</td>
+
+                </tr>
+                <tr>
+                  <td> <input type="checkbox" style="color: blue;"> Road4</td>
+                  <td style="color: blue;">49</td>
+                  <td style="color: blue;">115</td>
+                  <td style="color: blue;">4591.91</td>
+                  <td>115</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0.0</td>
+
+                  <td>NA</td>
+                  <td>NA</td>
+
+                </tr>
+                <tr>
+                  <td><input type="checkbox" style="color: blue;"> Road5</td>
+                  <td style="color: blue;">49</td>
+                  <td style="color: blue;">115</td>
+                  <td style="color: blue;">4591.91</td>
+                  <td>115</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0.0</td>
+
+                  <td>NA</td>
+                  <td>NA</td>
+
+                </tr>
+              </tbody>
+            </table>
+            <!-- road table -->
+            <table id="road" style="display:none;">
+              <thead style=" align-items: center;">
+                <tr>
+                  <th rowspan="2"><input type="checkbox">road </th>
+                  <th rowspan="2">Unique Zone (GIS)</th>
+                  <th colspan="3">
+                    District wise Zone
+
+                  </th>
+
+                  <th colspan="2">Total Stretches</th>
+                  <th colspan="2">Overdue for Renewal</th>
+                  <th>Renewal Due in 0 yr (FY 24-25)</th>
+                </tr>
+                <tr>
+
+                  <th>Count</th>
+                  <th>Length(km)</th>
+                  <th>Target count</th>
+
+                  <th>No.</th>
+                  <th>Length(km)</th>
+                  <th>Streaches/No.</th>
+                  <th>Length(km)</th>
+                  <th>Streaches/No.</th>
+                </tr>
+              </thead>
+              <tbody class="subcolomn" style="color: blueviolet; text-align: center;">
+                <tr>
+                  <td><input type="checkbox" style="color: blue;"> National Highway</td>
+                  <td style="color: blue;">49</td>
+                  <td style="color: blue;">115</td>
+                  <td style="color: blue;">4591.91</td>
+                  <td style="color: blue;">115</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0.0</td>
+
+                  <td>NA</td>
+                  <td>NA</td>
+
+                </tr>
+                <tr>
+                  <td><input type="checkbox" style="color: blue;"> National Highway</td>
+                  <td style="color: blue;">49</td>
+                  <td style="color: blue;">115</td>
+                  <td style="color: blue;">4591.91</td>
+                  <td>115</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0.0</td>
+
+                  <td>NA</td>
+                  <td>NA</td>
+
+                </tr>
+                <tr>
+                  <td><input type="checkbox" style="color: blue;"> State Highway</td>
+                  <td style="color: blue;">49</td>
+                  <td style="color: blue;">115</td>
+                  <td style="color: blue;">4591.91</td>
+                  <td>115</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0.0</td>
+
+                  <td>NA</td>
+                  <td>NA</td>
+
+                </tr>
+                <tr>
+                  <td> <input type="checkbox" style="color: blue;"> Major District</td>
+                  <td style="color: blue;">49</td>
+                  <td style="color: blue;">115</td>
+                  <td style="color: blue;">4591.91</td>
+                  <td>115</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0.0</td>
+
+                  <td>NA</td>
+                  <td>NA</td>
+
+                </tr>
+                <tr>
+                  <td><input type="checkbox" style="color: blue;"> National Highway</td>
+                  <td style="color: blue;">49</td>
+                  <td style="color: blue;">115</td>
+                  <td style="color: blue;">4591.91</td>
+                  <td>115</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0.0</td>
+
+                  <td>NA</td>
+                  <td>NA</td>
+
+                </tr>
+              </tbody>
+            </table>
+            <!-- ward table -->
+            <table id="ward" style="display:none;">
+              <thead style=" align-items: center;">
+                <tr>
+                  <th rowspan="2"><input type="checkbox">ward Type</th>
+                  <th rowspan="2">Unique Zone (GIS)</th>
+                  <th colspan="3">
+                    District wise Zone
+
+                  </th>
+
+                  <th colspan="2">Total Stretches</th>
+                  <th colspan="2">Overdue for Renewal</th>
+                  <th>Renewal Due in 0 yr (FY 24-25)</th>
+                </tr>
+                <tr>
+
+                  <th>Count</th>
+                  <th>Length(km)</th>
+                  <th>Target count</th>
+
+                  <th>No.</th>
+                  <th>Length(km)</th>
+                  <th>Streaches/No.</th>
+                  <th>Length(km)</th>
+                  <th>Streaches/No.</th>
+                </tr>
+              </thead>
+              <tbody class="subcolomn" style="color: blueviolet; text-align: center;">
+                <tr>
+                  <td><input type="checkbox" style="color: blue;"> ward1</td>
+                  <td style="color: blue;">49</td>
+                  <td style="color: blue;">115</td>
+                  <td style="color: blue;">4591.91</td>
+                  <td style="color: blue;">115</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0.0</td>
+
+                  <td>NA</td>
+                  <td>NA</td>
+
+                </tr>
+                <tr>
+                  <td><input type="checkbox" style="color: blue;"> ward2</td>
+                  <td style="color: blue;">49</td>
+                  <td style="color: blue;">115</td>
+                  <td style="color: blue;">4591.91</td>
+                  <td>115</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0.0</td>
+
+                  <td>NA</td>
+                  <td>NA</td>
+
+                </tr>
+                <tr>
+                  <td><input type="checkbox" style="color: blue;"> ward3</td>
+                  <td style="color: blue;">49</td>
+                  <td style="color: blue;">115</td>
+                  <td style="color: blue;">4591.91</td>
+                  <td>115</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0.0</td>
+
+                  <td>NA</td>
+                  <td>NA</td>
+
+                </tr>
+                <tr>
+                  <td> <input type="checkbox" style="color: blue;"> ward4</td>
+                  <td style="color: blue;">49</td>
+                  <td style="color: blue;">115</td>
+                  <td style="color: blue;">4591.91</td>
+                  <td>115</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0.0</td>
+
+                  <td>NA</td>
+                  <td>NA</td>
+
+                </tr>
+                <tr>
+                  <td><input type="checkbox" style="color: blue;"> ward5</td>
+                  <td style="color: blue;">49</td>
+                  <td style="color: blue;">115</td>
+                  <td style="color: blue;">4591.91</td>
+                  <td>115</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0.0</td>
+
+                  <td>NA</td>
+                  <td>NA</td>
+
+                </tr>
+              </tbody>
+            </table>
+            <!-- view table -->
+            <table id="view" style="display:none;">
+              <thead style=" align-items: center;">
+                <tr>
+                  <th rowspan="2"><input type="checkbox">view Type</th>
+                  <th rowspan="2">Unique Zone (GIS)</th>
+                  <th colspan="3">
+                    District wise Zone
+
+                  </th>
+
+                  <th colspan="2">Total Stretches</th>
+                  <th colspan="2">Overdue for Renewal</th>
+                  <th>Renewal Due in 0 yr (FY 24-25)</th>
+                </tr>
+                <tr>
+
+                  <th>Count</th>
+                  <th>Length(km)</th>
+                  <th>Target count</th>
+
+                  <th>No.</th>
+                  <th>Length(km)</th>
+                  <th>Streaches/No.</th>
+                  <th>Length(km)</th>
+                  <th>Streaches/No.</th>
+                </tr>
+              </thead>
+              <tbody class="subcolomn" style="color: blueviolet; text-align: center;">
+                <tr>
+                  <td><input type="checkbox" style="color: blue;"> view1</td>
+                  <td style="color: blue;">49</td>
+                  <td style="color: blue;">115</td>
+                  <td style="color: blue;">4591.91</td>
+                  <td style="color: blue;">115</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0.0</td>
+
+                  <td>NA</td>
+                  <td>NA</td>
+
+                </tr>
+                <tr>
+                  <td><input type="checkbox" style="color: blue;"> view2</td>
+                  <td style="color: blue;">49</td>
+                  <td style="color: blue;">115</td>
+                  <td style="color: blue;">4591.91</td>
+                  <td>115</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0.0</td>
+
+                  <td>NA</td>
+                  <td>NA</td>
+
+                </tr>
+                <tr>
+                  <td><input type="checkbox" style="color: blue;"> view3</td>
+                  <td style="color: blue;">49</td>
+                  <td style="color: blue;">115</td>
+                  <td style="color: blue;">4591.91</td>
+                  <td>115</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0.0</td>
+
+                  <td>NA</td>
+                  <td>NA</td>
+
+                </tr>
+                <tr>
+                  <td> <input type="checkbox" style="color: blue;"> view4</td>
+                  <td style="color: blue;">49</td>
+                  <td style="color: blue;">115</td>
+                  <td style="color: blue;">4591.91</td>
+                  <td>115</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0.0</td>
+
+                  <td>NA</td>
+                  <td>NA</td>
+
+                </tr>
+                <tr>
+                  <td><input type="checkbox" style="color: blue;"> view5</td>
+                  <td style="color: blue;">49</td>
+                  <td style="color: blue;">115</td>
+                  <td style="color: blue;">4591.91</td>
+                  <td>115</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0.0</td>
+
+                  <td>NA</td>
+                  <td>NA</td>
+
+                </tr>
+              </tbody>
+            </table>
+
+
+
+          </table>
+        </div>
+      </div>
     </div>
-    <script type="module" src="./main.js"></script>
-    <script>
-            function updateDateAndTime(){
-    let now = new Date();
-    const date = now.toLocaleDateString();
-    const timet =now.toLocaleTimeString();
-     
-   const a=document.getElementById("update");
-   const b=document.getElementById("refres-btn");
-    
- a.innerHTML = `<div>${date}</div> <br/><div>${timet}</div> `;
- a.appendChild(b);
-   
-  
-}  
-setTimeout(updateDateAndTime,1000);
+
+  </div>
+  <!-- <script src="./measure.js"></script> -->
+  <script src="./index.js"></script>
+  <script type="module" src="./main.js"></script>
+  <script>
+
+    // refres icon funtionality start here
+    function updateDateAndTime() {
+      let now = new Date();
+      const date = now.toLocaleDateString();
+      const timet = now.toLocaleTimeString();
+
+      const a = document.getElementById("update");
+      const b = document.getElementById("refres-btn");
+
+      a.innerHTML = `<div>${date}</div> <br/><div>${timet}</div> `;
+      a.appendChild(b);
+
+
+    }
+    setTimeout(updateDateAndTime, 1000);
     updateDateAndTime();
-
-
-        document.getElementById('toggle-sidebar').addEventListener('click', function() {
-            const sidebar = document.querySelector('.sidebar');
-            const map = document.querySelector('.main-map');
-            sidebar.classList.toggle('hidden');
-            map.classList.toggle('expanded');
-        });
-
-        document.getElementById('show-table').addEventListener('click', function() {
-            const tableContainer = document.getElementById('table-container');
-            if (tableContainer.style.display === 'none' || tableContainer.style.display === '') {
-                tableContainer.style.display = 'block';
-            } else {
-                tableContainer.style.display = 'none';
-            }
-        });
-       
-
-        document.getElementsByClassName('sidebar2').style.display='block';
-        document.getElementsByClassName('sidebar2').style.zIndex='999';
-          document.getElementsByClassName('menu-icon').addEventListener('click',
-          function togglesidebar(){
-           
-            const sidebar = document.getElementById('sidebar');
-            sidebar.classList.toggle('active');
-        });
+    // refres icon funtionality end here
 
 
 
-    document.getElementById('toggle-sidebar').addEventListener('click',
-    function toggle(){
-      let searchButtom= document.getElementById("search-btn");
-      let mesurementButtom= document.getElementById("measurement-btn");
-      let gridButtom= document.getElementById("grid-btn");
-      let listButtom= document.getElementById("list-btn");
-      let toggleButtom= document.getElementById("toggle-sidebar");
-      
+    // full extent button functinality start here
+    let searchButtom = document.getElementById("search-btn");
 
-     
-     
-     
+    let mesurementButtom = document.getElementById("measurement-btn");
+    let gridButtom = document.getElementById("grid-btn");
+    let listButtom = document.getElementById("list-btn");
+    let toggleButtom = document.getElementById("toggle-sidebar");
+
+    let toggleText = document.getElementById("toggle-text");
+    let searchText = document.getElementById("search-text");
+    let measureText = document.getElementById("measure-text");
+    let gridText = document.getElementById("grid-text");
+    let listText = document.getElementById("list-text");
+    const allButtons = [
+      searchButtom,
+      mesurementButtom,
+      gridButtom,
+      listButtom,
+      toggleButtom,
+
+    ]
+    const allButtonText = [toggleText,
+      searchText,
+      measureText,
+      gridText,
+      listText];
+    document.getElementById('toggle-sidebar').addEventListener('click', function () {
+      const sidebar = document.querySelector('.sidebar');
+      const map = document.querySelector('.map');
+      sidebar.classList.toggle('hidden');
+      map.classList.toggle('expanded');
+
+
+      const toggleIcon = document.getElementById('toggle-icon');
+
+      allButtons.forEach((data) => {
+
+        if (data.style.left === '30em') {
+          data.style.left = '0em';
+          document.getElementById('toggle-sidebar').style.transform = 'rotate(180deg)'
+
+        }
+        else {
+          data.style.left = '30em'
+          document.getElementById('toggle-sidebar').style.transform = 'rotate(0deg)'
+
+        }
+      })
+      allButtonText.forEach((data) => {
+
+        if (data.style.left === '25.5em') {
+          data.style.left = '0.5em';
+
+        }
+        else {
+          data.style.left = '25.5em'
+
+        }
+      })
     });
-    
-    // document.getElementById('toggle-sidebar').addEventListener('douleclick',function reset(){
-    //    mesurementButtom= document.getElementById("measurement-btn");
-    //    searchButtom= document.getElementById("search-btn");
-    //    gridButtom= document.getElementById("grid-btn");
-    //    listButtom= document.getElementById("list-btn");
-    //    toggleButtom= document.getElementById("toggle-sidebar");
-      
+    // document.getElementsByClassName('sidebar2').style.display = 'block';
+    // document.getElementsByClassName('sidebar2').style.zIndex = '999';
+    // document.getElementsByClassName('menu-icon').addEventListener('click',
+    //   function togglesidebar() {
 
-     
-    //  toggleButtom.style.left="400px";
-    //  searchButtom.style.left="415px";
-    //  mesurementButtom.style.left="415px";
-    //  gridButtom.style.left="415px";
-    //  listButtom.style.left="415px";
+    //     const sidebar = document.getElementById('sidebar');
+    //     sidebar.classList.toggle('active');
+    //   });
+
+
+
+
+
+
+
+    // full extent button functinality end here
+
+
+
+    //  table button  js code start here
+    document.getElementById('show-table').addEventListener('click', function () {
+      const tableContainer = document.getElementById('table-container');
+      if (tableContainer.style.display === 'none' || tableContainer.style.display === '') {
+        tableContainer.style.display = 'block';
+      } else {
+        tableContainer.style.display = 'none';
+      }
+    });
+
+
+    //  table button  js code end here
+
+
+    // search buttom input box
+
+    function searchClick() {
+      if (document.getElementById("search-input-div").style.display == 'none') {
+        document.getElementById("search-input").style.display = "block";
+        document.getElementById("search-input-div").style.display = "block";
+        document.getElementById("search-input-div").style.display = "flex";
+      }
+      else {
+        document.getElementById("search-input").style.display = "none";
+        document.getElementById("search-input-div").style.display = "none";
+
+      }
+
+    }
+    // measure button functionality
+    function measureClick() {
+      if (document.getElementById("measure-box").style.display == 'none') {
+        document.getElementById("measure-box").style.display = "block";
+      }
+      else {
+        document.getElementById("measure-box").style.display = 'none';
+      }
+    }
+    // querypannel button functionality
+
+    function queryClick() {
+      if (document.getElementById("query-box").style.display === 'none') {
+        document.getElementById("query-box").style.display = "block";
+      }
+      else {
+        document.getElementById("query-box").style.display = 'none';
+      }
+    }
+    // list button functionality
+
+    function listClick() {
+      if (document.getElementById("layer-box").style.display === 'none') {
+        document.getElementById("layer-box").style.display = "block";
+      }
+      else {
+        document.getElementById("layer-box").style.display = 'none';
+      }
+    }
+    // layer button functionality
+
+    function layerClick() {
+      if (document.getElementById("map-layer-div").style.display === 'none') {
+        document.getElementById("map-layer-div").style.display = "block";
+      }
+      else {
+        document.getElementById("map-layer-div").style.display = 'none';
+      }
+    }
+    // const DropdownLinks = [
+    //   { name: "Link 1", link: "link1" },
+    //   { name: "Link 2", link: "link2" },
+    //   { name: "Link 3", link: "link3" }
+    // ];
+
+    // const dropdownLinksContainer = document.getElementById('dropdown-links');
+    // DropdownLinks.forEach(data => {
+    //   const li = document.createElement('li');
+    //   const a = document.createElement('a');
+    //   a.className = 'dropdown-link';
+    //   a.href = data.link;
+    //   a.textContent = data.name;
+    //   li.appendChild(a);
+    //   dropdownLinksContainer.appendChild(li);
     // });
 
-// search buttom input box
+    // query button div attribute buttons
 
-function searchClick(){
-  document.getElementById("search-input").style.display="block";
-  document.getElementById("search-input-dropdown").style.display="block";
-  document.getElementById("search-input-div").style.display="block";
-  document.getElementById("search-input-div").style.display="flex";
 
-}
-function measureClick(){
-  document.getElementById("search-input-div").style.display="flex";
 
-}
-function gridClick(){
-  document.getElementById("search-input-div").style.display="flex";
 
-}
-function listClick(){
-  document.getElementById("grid-btn").style.display="flex";
 
-}
-const DropdownLinks = [
-  { name: "Link 1", link: "link1" },
-  { name: "Link 2", link: "link2" },
-  { name: "Link 3", link: "link3" }
-];
+    // searchInputButton.addEventListener('click', () => {
+    //   const newLon = 77.1025; // Example longitude for New Delhi
+    //   const newLat = 28.7041; // Example latitude for New Delhi
+    //   changeMapCenter(newLon, newLat);
+    // });
+  </script>
+  <script src="./libs/v9.2.4-package/dist/ol.js"></script>
 
-const dropdownLinksContainer = document.getElementById('dropdown-links');
-DropdownLinks.forEach(data => {
-  const li = document.createElement('li');
-  const a = document.createElement('a');
-  a.className = 'dropdown-link';
-  a.href = data.link;
-  a.textContent = data.name;
-  li.appendChild(a);
-  dropdownLinksContainer.appendChild(li);
-});
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ol3/3.20.1/ol.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@turf/turf@6.5.0/dist/turf.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/wkb@0.0.6/dist/wkb.min.js"></script>
 
-// 
-
-    </script>
 </body>
+
 </html>
