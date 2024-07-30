@@ -369,6 +369,202 @@ document.getElementById('bus-stop').addEventListener('click', function() {
   });
   
 });
+const hospital = new ol.layer.Vector({
+  source: new ol.source.Vector({
+      url: 'bus_stop.geojson',
+      format: new ol.format.GeoJSON()
+  }),
+  visible: false,
+  title: 'goverment offices',
+  style: function(feature) {
+      if (feature.getGeometry().getType() === 'Point') {
+          return new ol.style.Style({
+              image: new ol.style.Icon({
+                  src: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="blue" /></svg>',
+                  scale: 1.0
+              }),
+              text: new ol.style.Text({
+                  text: feature.get('name'), // Replace 'name' with the property containing the name
+                  offsetY: -15, // Adjust the vertical position of the text
+                  font: '12px Calibri,sans-serif',
+                  fill: new ol.style.Fill({
+                      color: '#000'
+                  }),
+                  stroke: new ol.style.Stroke({
+                      color: 'rgb(5, 69, 207)',
+                      width: 2
+                  })
+              })
+          });
+      }
+  }
+});
+map.addLayer(hospital);
+
+document.getElementById('hospital').addEventListener('click', function() {
+  const currentVisible = busStop.getVisible();
+  busStop.setVisible(!currentVisible);
+
+  const lucknowCenter = ol.proj.fromLonLat([80.9462, 26.8505]); // Center of Lucknow
+  const lucknowZoom = 14; // Desired zoom level for Lucknow
+
+  // Adjust the map view
+  map.getView().animate({
+      center: lucknowCenter,
+      zoom: lucknowZoom,
+      duration: 1000 // Animation duration in milliseconds
+  });
+  
+});
+const eduInstitutes = new ol.layer.Vector({
+  source: new ol.source.Vector({
+      url: 'bus_stop.geojson',
+      format: new ol.format.GeoJSON()
+  }),
+  visible: false,
+  title: 'goverment offices',
+  style: function(feature) {
+      if (feature.getGeometry().getType() === 'Point') {
+          return new ol.style.Style({
+              image: new ol.style.Icon({
+                  src: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="blue" /></svg>',
+                  scale: 1.0
+              }),
+              text: new ol.style.Text({
+                  text: feature.get('name'), // Replace 'name' with the property containing the name
+                  offsetY: -15, // Adjust the vertical position of the text
+                  font: '12px Calibri,sans-serif',
+                  fill: new ol.style.Fill({
+                      color: '#000'
+                  }),
+                  stroke: new ol.style.Stroke({
+                      color: 'rgb(5, 69, 207)',
+                      width: 2
+                  })
+              })
+          });
+      }
+  }
+});
+map.addLayer(eduInstitutes);
+
+document.getElementById('educational-institutes').addEventListener('click', function() {
+  const currentVisible = busStop.getVisible();
+  busStop.setVisible(!currentVisible);
+
+  const lucknowCenter = ol.proj.fromLonLat([80.9462, 26.8505]); // Center of Lucknow
+  const lucknowZoom = 14; // Desired zoom level for Lucknow
+
+  // Adjust the map view
+  map.getView().animate({
+      center: lucknowCenter,
+      zoom: lucknowZoom,
+      duration: 1000 // Animation duration in milliseconds
+  });
+  
+});
+const bankAtm= new ol.layer.Vector({
+  source: new ol.source.Vector({
+      url: 'bus_stop.geojson',
+      format: new ol.format.GeoJSON()
+  }),
+  visible: false,
+  title: 'goverment offices',
+  style: function(feature) {
+      if (feature.getGeometry().getType() === 'Point') {
+          return new ol.style.Style({
+              image: new ol.style.Icon({
+                  src: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="blue" /></svg>',
+                  scale: 1.0
+              }),
+              text: new ol.style.Text({
+                  text: feature.get('name'), // Replace 'name' with the property containing the name
+                  offsetY: -15, // Adjust the vertical position of the text
+                  font: '12px Calibri,sans-serif',
+                  fill: new ol.style.Fill({
+                      color: '#000'
+                  }),
+                  stroke: new ol.style.Stroke({
+                      color: 'rgb(5, 69, 207)',
+                      width: 2
+                  })
+              })
+          });
+      }
+  }
+});
+map.addLayer(bankAtm);
+
+document.getElementById('bank-atm').addEventListener('click', function() {
+  const currentVisible = busStop.getVisible();
+  busStop.setVisible(!currentVisible);
+
+  const lucknowCenter = ol.proj.fromLonLat([80.9462, 26.8505]); // Center of Lucknow
+  const lucknowZoom = 14; // Desired zoom level for Lucknow
+
+  // Adjust the map view
+  map.getView().animate({
+      center: lucknowCenter,
+      zoom: lucknowZoom,
+      duration: 1000 // Animation duration in milliseconds
+  });
+  
+});
+const petrolPump= new ol.layer.Vector({
+  source: new ol.source.Vector({
+      url: 'bus_stop.geojson',
+      format: new ol.format.GeoJSON()
+  }),
+  visible: false,
+  title: 'goverment offices',
+  style: function(feature) {
+      if (feature.getGeometry().getType() === 'Point') {
+          return new ol.style.Style({
+              image: new ol.style.Icon({
+                  src: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="blue" /></svg>',
+                  scale: 1.0
+              }),
+              text: new ol.style.Text({
+                  text: feature.get('name'), // Replace 'name' with the property containing the name
+                  offsetY: -15, // Adjust the vertical position of the text
+                  font: '12px Calibri,sans-serif',
+                  fill: new ol.style.Fill({
+                      color: '#000'
+                  }),
+                  stroke: new ol.style.Stroke({
+                      color: 'rgb(5, 69, 207)',
+                      width: 2
+                  })
+              })
+          });
+      }
+  }
+});
+map.addLayer(petrolPump);
+
+document.getElementById('petrol-pump').addEventListener('click', function() {
+  const currentVisible = busStop.getVisible();
+  busStop.setVisible(!currentVisible);
+
+  const lucknowCenter = ol.proj.fromLonLat([80.9462, 26.8505]); // Center of Lucknow
+  const lucknowZoom = 14; // Desired zoom level for Lucknow
+
+  // Adjust the map view
+  map.getView().animate({
+      center: lucknowCenter,
+      zoom: lucknowZoom,
+      duration: 1000 // Animation duration in milliseconds
+  });
+  
+});
+
+
+
+
+
+
+
+
 
 
 // async function addGeoJSONLayer(map) {
