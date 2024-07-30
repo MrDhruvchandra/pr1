@@ -40,7 +40,7 @@ display: none;
 }
 
 .state-info{
-  background-color: rgb(245 85 45 / 87%);
+  background-color: #e87b38;;
   color: aliceblue;
   padding: 10px;
   margin: 4px;
@@ -375,7 +375,9 @@ display: none;
     font-weight: 300;
     margin-top: 25px;
 }
-/*    */
+
+
+/*   navbar */
 .category-item {
     background-color: white;
     color: inherit;
@@ -410,7 +412,7 @@ display: none;
 }
 
 .btn {
-    background-color: chocolate;
+    background-color: #e87b38;
     margin: 10px;
     padding: 10px;
 }
@@ -429,7 +431,7 @@ margin: 1px;
     top: 10px;
     right: 10px;
     z-index: 2;
-    background-color: chocolate;
+    background-color: #e87b38;
     border: none;
     padding: 10px;
     cursor: pointer;
@@ -446,7 +448,7 @@ margin: 1px;
     top: 26rem; /* Adjust positioning if needed */
     border-radius: 10px;
 }
-
+/* table starts from here */
 .table-container {
     position: absolute;
     bottom: 10px;
@@ -465,7 +467,7 @@ margin: 1px;
 .navbar{
     display: flex;
     justify-content: space-between;
-    background-color: #e35f0e;  
+    background-color: #e87b38;  
   overflow: hidden;
 }
 .nav-left a{
@@ -498,12 +500,19 @@ margin: 1px;
     background-color: #3cf124; 
     color: black;
 }
-.nav-left a:active{
-    background-color: #4CAF50;  
+.nav-left a:active {
+    background-color: #98df9a;
     color: white;
 }
-.nav-right a:active{
-    background-color: #4CAF50;  
+
+.nav-right a:active {
+    background-color: #0981de;
+    color: white;
+
+}
+
+.close a:active {
+    background-color: #dd1d1d;
     color: white;
 
 }
@@ -535,6 +544,8 @@ margin: 1px;
     width: 50%;
      
   }
+  /* table end from here */
+
   /* search input box */
 #search-input,#search-input-div,#search-input-dropdown{
   display: none;
@@ -548,11 +559,35 @@ margin: 1px;
 }
 .map-layer h2{
     font-size: larger;
- background-color: #e35f0e; 
+ background-color: #e87b38; 
+ border-radius: 3px;      
+         padding-inline: 15px;
+}
+/*  place layer start here */
+
+.place-map-layer button{
+    border: 0;
+    background: transparent;    
+    height: 1.5em;
+        width: 10em;
+        margin: 7px;
+        padding: 0px;
+        border-radius: 5px;
+}
+.place-map-layer button:hover{
+    background-color: #999;
+}
+.place-map-layer button:active{
+    background-color: #465ade;
+}
+.place-map-layer h2{
+    font-size: larger;
+ background-color: #e87b38; 
  border-radius: 3px;      
          padding-inline: 15px;
 }
 
+/*  place layer end here */
 
  @media (max-width: 768px) {
     table {

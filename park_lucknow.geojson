@@ -1,0 +1,29 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+      {
+        "type": "Feature",
+        "properties": {
+          "name": "Janeshwar Mishra Park",
+          "description": "Large park with walking trails and greenery."
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [80.9462, 26.8505]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "name": "Gomti Riverfront Park",
+          "description": "Park along the Gomti River with recreational facilities."
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [80.9305, 26.8421]
+        }
+      }
+      
+    ]
+  }
+  

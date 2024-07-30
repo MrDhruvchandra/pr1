@@ -1,0 +1,26 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+      {
+        "type": "Feature",
+        "properties": {
+          "name": "Bus Stop 1"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [80.9461, 26.8500]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "name": "Bus Stop 2"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [80.9475, 26.8515]
+        }
+      }
+     ]
+  }
+  

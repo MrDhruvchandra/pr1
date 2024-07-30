@@ -136,23 +136,18 @@ function selectInput(list) {
             { name: "Jammu and Kashmir", coordinates: { lat: 33.7782, lon: 76.5762 } }
           ];
           
-          // Get the unordered list element
-          const searchDropdownListUl = document.getElementById('search-dropdown-list-ul');
+           const searchDropdownListUl = document.getElementById('search-dropdown-list-ul');
           const searchInputButtonA = document.getElementById('search-input-button-a');
           
-          // Iterate over the array and create list items
-          indianStatesAndUTs.forEach(state => {
-            // Create a new list item
-            const li = document.createElement('li');
+           indianStatesAndUTs.forEach(state => {
+             const li = document.createElement('li');
             
-            // Create a new button
-            const button = document.createElement('button');
+             const button = document.createElement('button');
             button.textContent = `${state.name} `;
             button.id = `search-dropdown-li-button`;
             button.className = `([${state.coordinates.lat}, ${state.coordinates.lon}])`;
 
-            // 
-            
+
             // Optionally, add an event listener to the button
             button.addEventListener('click', () => {
              if(searchInput.value===''  ){
@@ -262,7 +257,10 @@ function drainClick() {
   
 //  ended here
 
-
+// right arrow button top right corner
+function goBack() {
+    window.history.back();
+}
 
 
 
@@ -273,6 +271,48 @@ function drainClick() {
 
 // table navbar buttons functionality
 
+// download button right navbar on table
+function downloadAllTablesAsCSV() {
+    const tableIds = ['summary', 'road', 'ward', 'view', 'zone'];
+    let csv = [];
+
+    tableIds.forEach(tableId => {
+        let table = document.getElementById(tableId);
+        let rows = table.rows;
+
+        csv.push(`Table: ${tableId}`); // Add table name to the CSV
+        for (let i = 0; i < rows.length; i++) {
+            let row = [], cols = rows[i].querySelectorAll("td, th");
+
+            for (let j = 0; j < cols.length; j++) {
+                row.push(cols[j].innerText);
+            }
+
+            csv.push(row.join(","));
+        }
+        csv.push(""); // Add an empty line between tables
+    });
+
+    let csvString = csv.join("\n");
+    let blob = new Blob([csvString], { type: "text/csv" });
+    let link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = "tables.csv";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
+//  tabel close button right navbar
+
+function closeTable() {
+    const tableContainer = document.getElementById('table-container');
+    if (tableContainer.style.display === 'none' || tableContainer.style.display === '') {
+        tableContainer.style.display = 'block';
+        tableContainer.style.maxHeight = '200px';
+    } else {
+        tableContainer.style.display = 'none';
+    }
+}
 //  summary button
 const summaryLink = document.querySelector('#summary-link');
 const summaryDiv = document.querySelector('#summary');
@@ -366,18 +406,20 @@ viewLink.addEventListener('click', () => {
       wardDiv.style.display = 'none';
     }
 });
-
+function minimizeWindow() {
+     document.getElementById('table-container').style.maxHeight = '60px';
+}
+function maxmizeTable() {
+     document.getElementById('table-container').style.maxHeight = '400px';
+}
 // bridge dropdown
 const bridges = ['item1','item2','item3','item3','item3','item3','item3','item3'];
   
-  // Get the unordered list element
-  const bridgeDropdownListUl = document.getElementById('bridge-dropdown-list-ul');
+   const bridgeDropdownListUl = document.getElementById('bridge-dropdown-list-ul');
   const bridgeInputButtonA = document.getElementById('bridge-input-button-a');
   
-  // Iterate over the array and create list items
-  bridges.forEach(e => {
-    // Create a new list item
-    const li = document.createElement('li');
+   bridges.forEach(e => {
+     const li = document.createElement('li');
     
     // Create a new button
     const button = document.createElement('button');
@@ -386,11 +428,9 @@ const bridges = ['item1','item2','item3','item3','item3','item3','item3','item3'
     button.className = `${e}`;
 
     
-    // Append the button to the list item
-    li.appendChild(button);
+     li.appendChild(button);
     
-    // Append the list item to the unordered list
-    bridgeDropdownListUl.appendChild(li);
+     bridgeDropdownListUl.appendChild(li);
   });
   function openBridgeDropdown() {
     let bridgeDropdownList = document.getElementById("bridge-dropdown-list");

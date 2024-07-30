@@ -57,14 +57,15 @@
     <div class="sidebar">
       <div class="heading">
         <img src="./logo/logo1.jpg" alt="">
-        <div>
-          <h1>Nagar Nigam Lucknow</h1>
+        <div style="padding-top: 20px;">
+          <h1>Lucknow</h1>
           <p>Government Of Uttar Pradesh</p>
         </div>
         <img src="./logo/logo2.png" alt="">
       </div>
       <div>
-        <div class="state-info" style="font-weight: 600; font-size: larger; color: black;">State: distance in km</div>
+        <div class="state-info" style="font-weight: 600; font-size: larger; color: black;">Uttar Pradesh: 351.5km
+        </div>
         <div class="last-updated" style="display: flex; justify-content: space-between;">
           <div>Last Updated On</div>
           <div id="update" style="display: flex; justify-content: space-between; gap: 5px; ">
@@ -72,14 +73,24 @@
             <button id="refres-btn" onclick="updateDateAndTime()"><i class="fa-solid fa-arrows-rotate"></i></button>
           </div>
         </div>
-        <div class="section-title" style="text-align: start;"> PWD ROADS
+        <div class="section-title" style="text-align: start; padding-inline-start: 130px;"> Lucknow
         </div>
         <div class="category">
-          <div class="category-item" style="color: red;">RENEWAL</div>
-          <div class="category-item" style="color: rgb(33, 233, 113);">WIDTH</div>
-          <div class="category-item" style="color: rgb(5, 69, 206);">THICKNESS</div>
-          <div class="category-item" style="color: rgb(242, 218, 63);">SURFACE TYPE</div>
-          <div class="category-item" style="color: rgb(111, 22, 199);">DIVISION</div>
+          <div class="category-item" style="color: red;">
+            <button id="parks" style="border: 0; background: transparent; width: 27em; color: green;">PARKS</button>
+          </div>
+          <div class="category-item" style="color: rgb(33, 233, 113);">
+            <button id="gov-office"
+              style="border: 0; background: transparent; width: 27em; color: rgb(17, 50, 180);">GOVERNMENT
+              OFFICES</button>
+
+          </div>
+          <div class="category-item" style="color: rgb(5, 69, 207);">
+            <button id="bus-stop" style="border: 0; background: transparent; width: 27em; color: rgb(17, 50, 180);">
+              BUS STOP </button>
+          </div>
+          <div class="category-item" style="color: rgb(242, 218, 63);">HOSPITAL</div>
+          <div class="category-item" style="color: rgb(111, 22, 199);">EDUCATIONAL INSTITUTES</div>
         </div>
         <div class="section-title" style="text-align: start; display: flex; justify-content: space-between;">
           <div style="display: flex; justify-content: space-between; gap: 16em;">
@@ -205,6 +216,7 @@
                         <option value="area">Area (Polygon)</option>
                       </select>
                     </form>
+                    <!-- <button onclick="measureBox()">submit</button> -->
                   </div>
 
                 </div>
@@ -510,7 +522,7 @@
 
 
       <!--          arrow button top right corner  start here-->
-      <button
+      <button onclick="goBack()"
         style="width: 40px; height: 40px; margin: 1px; padding: 3px;   position: fixed; top:1.3em; right: 1em; border: 2px solid white; border-radius: 24px; background-color: black; color: aliceblue; z-index: 1;">
         <i class="fa-solid fa-arrow-left"></i>
       </button>
@@ -538,6 +550,29 @@
         </div>
       </div>
       <!-- layer div end here -->
+
+
+      <!--          map-layer button top right corner  start hare-->
+      <!--place layer div start here -->
+      <button id="state-layer-button" onclick="placeLayerClick()"
+        style="width: 40px; height: 40px; margin: 1px; padding: 3px;   position: fixed; top:9em; right: 1em; border: 2px solid white; border-radius: 24px; background-color: black; color: aliceblue; z-index: 1;">
+        <i class="fa-solid fa-location-dot"></i>
+      </button>
+
+
+      <div class="place-map-layer-div" id="place-map-layer-div"
+        style=" display: none; width: 12vw; height: 12em; margin: 0px; padding: 15px; justify-content: space-between; position: fixed; top: 8em; right: 3.4em; border: 2px solid rgb(5, 0, 0); border-radius: 7px; background-color: white; color: rgb(4, 16, 27); z-index: 1;">
+
+        <div id="place-map-layer" class="place-map-layer" style="display: flex; flex-direction: column;">
+          <h2>choose places</h2>
+          <button id="countrylayer"> Country</button>
+          <button id="statelayer"> State</button>
+          <button id="districtlayer"> Districts</button>
+          <button id="parklayer"> National park</button>
+
+        </div>
+      </div>
+      <!-- place layer div end here -->
 
       <!--          search input section button top  start here-->
 
@@ -572,7 +607,7 @@
 
     </div>
 
-    <button id="show-table" class="btn">table</button>
+    <button id="show-table" class="btn" onclick="closeTable()">table</button>
     <div id="table-container" class="table-container">
       <div style="display: flex; flex-direction: column; ">
         <div style="  background-color: aquamarine;"></div>
@@ -595,10 +630,23 @@
 
 
                   <a href="">Disclaimer</a>
-                  <a href="" id="minimizeIcon" onclick="minimizeWindow()"><i class="fa-solid fa-minus"></i></a>
-                  <a href="" id="download"><i class="fa-solid fa-circle-down"></i></a>
-                  <a href="" id="restoreIcon"> <i class="fa-solid fa-minimize"></i></a>
-                  <a href="" id="close" onclick="closeWindow()"> <i class="fa-solid fa-xmark"></i></a>
+                  <button id="minimizeIcon" style="background: #e87b38; border: 0; outline: 0;"
+                    onclick="minimizeWindow()">
+                    <a><i class="fa-solid fa-minus"></i></a>
+
+                  </button>
+                  <button onclick="downloadAllTablesAsCSV()" style="background: #e87b38; border: 0; outline: 0;">
+                    <a id="download"><i class="fa-solid fa-circle-down"></i></a>
+
+                  </button>
+                  <button id="maximize" onclick="maxmizeTable()" style="background: #e87b38; border: 0; outline: 0;">
+                    <a> <i class="fa-solid fa-expand"></i></a>
+                  </button>
+                  <button id="close" class="close" onclick="closeTable()"
+                    style="background:#e87b38; border: 0; outline: 0;">
+                    <a> <i class="fa-solid fa-xmark"></i></a>
+
+                  </button>
 
 
 
@@ -1118,7 +1166,6 @@
         </div>
       </div>
     </div>
-
   </div>
   <!-- <script src="./measure.js"></script> -->
   <script src="./index.js"></script>
@@ -1141,7 +1188,7 @@
     }
     setTimeout(updateDateAndTime, 1000);
     updateDateAndTime();
-    // refres icon funtionality end here
+    // refresh icon funtionality end here
 
 
 
@@ -1171,6 +1218,7 @@
       measureText,
       gridText,
       listText];
+
     document.getElementById('toggle-sidebar').addEventListener('click', function () {
       const sidebar = document.querySelector('.sidebar');
       const map = document.querySelector('.map');
@@ -1225,14 +1273,14 @@
 
 
     //  table button  js code start here
-    document.getElementById('show-table').addEventListener('click', function () {
-      const tableContainer = document.getElementById('table-container');
-      if (tableContainer.style.display === 'none' || tableContainer.style.display === '') {
-        tableContainer.style.display = 'block';
-      } else {
-        tableContainer.style.display = 'none';
-      }
-    });
+    // document.getElementById('show-table').addEventListener('click', function () {
+    //   const tableContainer = document.getElementById('table-container');
+    //   if (tableContainer.style.display === 'none' || tableContainer.style.display === '') {
+    //     tableContainer.style.display = 'block';
+    //   } else {
+    //     tableContainer.style.display = 'none';
+    //   }
+    // });
 
 
     //  table button  js code end here
@@ -1282,7 +1330,7 @@
         document.getElementById("layer-box").style.display = 'none';
       }
     }
-    // layer button functionality
+    // layer button functionality top right
 
     function layerClick() {
       if (document.getElementById("map-layer-div").style.display === 'none') {
@@ -1292,40 +1340,23 @@
         document.getElementById("map-layer-div").style.display = 'none';
       }
     }
-    // const DropdownLinks = [
-    //   { name: "Link 1", link: "link1" },
-    //   { name: "Link 2", link: "link2" },
-    //   { name: "Link 3", link: "link3" }
-    // ];
+    // location layer button (right top third button)
 
-    // const dropdownLinksContainer = document.getElementById('dropdown-links');
-    // DropdownLinks.forEach(data => {
-    //   const li = document.createElement('li');
-    //   const a = document.createElement('a');
-    //   a.className = 'dropdown-link';
-    //   a.href = data.link;
-    //   a.textContent = data.name;
-    //   li.appendChild(a);
-    //   dropdownLinksContainer.appendChild(li);
-    // });
+    function placeLayerClick() {
+      if (document.getElementById("place-map-layer-div").style.display === 'none') {
+        document.getElementById("place-map-layer-div").style.display = "block";
+      }
+      else {
+        document.getElementById("place-map-layer-div").style.display = 'none';
+      }
+    }
 
-    // query button div attribute buttons
-
-
-
-
-
-    // searchInputButton.addEventListener('click', () => {
-    //   const newLon = 77.1025; // Example longitude for New Delhi
-    //   const newLat = 28.7041; // Example latitude for New Delhi
-    //   changeMapCenter(newLon, newLat);
-    // });
   </script>
   <script src="./libs/v9.2.4-package/dist/ol.js"></script>
-
+  <!-- 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/ol3/3.20.1/ol.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@turf/turf@6.5.0/dist/turf.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/wkb@0.0.6/dist/wkb.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/wkb@0.0.6/dist/wkb.min.js"></script> -->
 
 </body>
 
