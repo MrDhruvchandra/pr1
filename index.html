@@ -11,7 +11,7 @@
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
   <!-- <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'> -->
-
+  <link rel="stylesheet" href="index.css">
   <style>
     .category {
       overflow-y: auto;
@@ -57,78 +57,47 @@
     <div class="sidebar">
       <div class="heading">
         <img src="./logo/logo1.jpg" alt="">
-        <div style="padding-top: 20px;">
+        <div>
           <h1>Lucknow</h1>
           <p>Government Of Uttar Pradesh</p>
         </div>
         <img src="./logo/logo2.png" alt="">
       </div>
       <div>
-        <div class="state-info" style="font-weight: 600; font-size: larger; color: black;">Uttar Pradesh: 351.5km
-        </div>
-        <div class="last-updated" style="display: flex; justify-content: space-between;">
+        <div class="state-info">Uttar Pradesh</div>
+        <div class="last-updated">
           <div>Last Updated On</div>
-          <div id="update" style="display: flex; justify-content: space-between; gap: 5px; ">
-
+          <div id="update">
             <button id="refres-btn" onclick="updateDateAndTime()"><i class="fa-solid fa-arrows-rotate"></i></button>
           </div>
         </div>
-        <div class="section-title" style="text-align: start; padding-inline-start: 165px;"> Lucknow
-        </div>
+        <div class="section-title">Lucknow</div>
         <div class="category">
-          <div class="category-item" style="color: red;">
-            <button id="parks" style="border: 0; background: transparent; width: 27em; color: green;">PARKS</button>
+          <div class="category-item">
+            <button id="parks">PARKS</button>
           </div>
-          <div class="category-item" style="color: rgb(33, 233, 113);">
-            <button id="gov-office"
-              style="border: 0; background: transparent; width: 27em; color: rgb(17, 50, 180);">GOVERNMENT
-              OFFICES</button>
-
+          <div class="category-item">
+            <button id="gov-office">GOVERNMENT OFFICES</button>
           </div>
-          <div class="category-item" style="color: rgb(5, 69, 207);">
-            <button id="bus-stop" style="border: 0; background: transparent; width: 27em; color: rgb(17, 50, 180);">
-              BUS STOP </button>
+          <div class="category-item">
+            <button id="bus-stop">BUS STOP</button>
           </div>
-          <div class="category-item" style="color: rgb(242, 218, 63);">
-            <button id="hospital" style="border: 0; background: transparent; width: 27em; color: rgb(17, 50, 180);">
-              HOSPITAL </button>
+          <div class="category-item">
+            <button id="hospital">HOSPITAL</button>
           </div>
-          <div class="category-item" style="color: rgb(242, 218, 63);">
-            <button id="educational-institutes"
-              style="border: 0; background: transparent; width: 27em; color: rgb(111, 22, 199);">
-              EDUCATIONAL INSTITUTES </button>
+          <div class="category-item">
+            <button id="educational-institutes">EDUCATIONAL INSTITUTES</button>
           </div>
-          <div class="category-item" style="color: rgb(242, 218, 63);">
-            <button id="bank-atm" style="border: 0; background: transparent; width: 27em; color: rgb(111, 22, 199);">
-              BANK & ATM </button>
+          <div class="category-item">
+            <button id="bank-atm">BANK & ATM</button>
           </div>
-          <div class="category-item" style="color: rgb(242, 218, 63);">
-            <button id="petrol-pump" style="border: 0; background: transparent; width: 27em; color: rgb(111, 22, 199);">
-              PETROL PUMP </button>
+          <div class="category-item">
+            <button id="petrol-pump">PETROL PUMP</button>
           </div>
         </div>
-
-        <!-- <div class="section-title" style="text-align: start; display: flex; justify-content: space-between;">
-          <div style="display: flex; justify-content: space-between; gap: 16em;">
-            <div>BRIDGES</div>
-            <div class="bridge-dropdown" style="z-index: 1; ">
-              <button id="bridge-dropdown-input-btn" onclick="openBridgeDropdown()" style=" color: #fff;">
-
-                <i class="fa-solid fa-caret-down"></i>
-
-              </button>
-              <div class="bridge-dropdown-list" id="bridge-dropdown-list" style="top: -.7em; left: 4em;">
-                <ul class="bridge-dropdown-list-ul" id="bridge-dropdown-list-ul">
-
-                </ul>
-              </div>
-            </div>
-
-          </div>
-        </div> -->
-        <!-- <div class="section-title" style="text-align: start;">PWD ROAD DIGITIZATION STATUS</div> -->
       </div>
     </div>
+
     <!-- sidebar 2 -->
     <i class="bx bx-menu" id="menu-icon" onclick="togglesidebar()"> </i>
 

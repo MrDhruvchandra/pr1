@@ -227,7 +227,7 @@ document.getElementById('parklayer').addEventListener('click', function() {
 // parks 
 const allParks = new ol.layer.Vector({
   source: new ol.source.Vector({
-      url: 'park_lucknow.geojson',
+      url: 'http://localhost:3000/graveyard',
       format: new ol.format.GeoJSON()
   }),
   visible: false,
@@ -262,7 +262,7 @@ document.getElementById('parks').addEventListener('click', function() {
   allParks.setVisible(!currentVisible);
 
   const lucknowCenter = ol.proj.fromLonLat([80.9462, 26.8505]); // Center of Lucknow
-  const lucknowZoom = 14; // Desired zoom level for Lucknow
+  const lucknowZoom = 12; // Desired zoom level for Lucknow
 
   // Adjust the map view
   map.getView().animate({
@@ -276,7 +276,7 @@ document.getElementById('parks').addEventListener('click', function() {
 // goverment offices in lucknow
 const govOffices = new ol.layer.Vector({
   source: new ol.source.Vector({
-      url: 'goverment_offices_geojson',
+      url: ' http://localhost:3000/governmentoffices',
       format: new ol.format.GeoJSON()
   }),
   visible: false,
@@ -311,7 +311,7 @@ document.getElementById('gov-office').addEventListener('click', function() {
   govOffices.setVisible(!currentVisible);
 
   const lucknowCenter = ol.proj.fromLonLat([80.9462, 26.8505]); // Center of Lucknow
-  const lucknowZoom = 14; // Desired zoom level for Lucknow
+  const lucknowZoom = 12; // Desired zoom level for Lucknow
 
   // Adjust the map view
   map.getView().animate({
@@ -324,11 +324,11 @@ document.getElementById('gov-office').addEventListener('click', function() {
 
 const busStop = new ol.layer.Vector({
   source: new ol.source.Vector({
-      url: 'bus_stop.geojson',
+      url: 'http://localhost:3000/busstop',
       format: new ol.format.GeoJSON()
   }),
   visible: false,
-  title: 'goverment offices',
+  title: 'busStop',
   style: function(feature) {
       if (feature.getGeometry().getType() === 'Point') {
           return new ol.style.Style({
@@ -359,7 +359,7 @@ document.getElementById('bus-stop').addEventListener('click', function() {
   busStop.setVisible(!currentVisible);
 
   const lucknowCenter = ol.proj.fromLonLat([80.9462, 26.8505]); // Center of Lucknow
-  const lucknowZoom = 14; // Desired zoom level for Lucknow
+  const lucknowZoom = 12; // Desired zoom level for Lucknow
 
   // Adjust the map view
   map.getView().animate({
@@ -371,16 +371,16 @@ document.getElementById('bus-stop').addEventListener('click', function() {
 });
 const hospital = new ol.layer.Vector({
   source: new ol.source.Vector({
-      url: 'bus_stop.geojson',
+      url: 'http://localhost:3000/hospital',
       format: new ol.format.GeoJSON()
   }),
   visible: false,
-  title: 'goverment offices',
+  title: 'hospital',
   style: function(feature) {
       if (feature.getGeometry().getType() === 'Point') {
           return new ol.style.Style({
               image: new ol.style.Icon({
-                  src: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="blue" /></svg>',
+                  src: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="20" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="red" /></svg>',
                   scale: 1.0
               }),
               text: new ol.style.Text({
@@ -402,11 +402,11 @@ const hospital = new ol.layer.Vector({
 map.addLayer(hospital);
 
 document.getElementById('hospital').addEventListener('click', function() {
-  const currentVisible = busStop.getVisible();
-  busStop.setVisible(!currentVisible);
+  const currentVisible =hospital.getVisible();
+  hospital.setVisible(!currentVisible);
 
   const lucknowCenter = ol.proj.fromLonLat([80.9462, 26.8505]); // Center of Lucknow
-  const lucknowZoom = 14; // Desired zoom level for Lucknow
+  const lucknowZoom = 12; // Desired zoom level for Lucknow
 
   // Adjust the map view
   map.getView().animate({
@@ -418,11 +418,11 @@ document.getElementById('hospital').addEventListener('click', function() {
 });
 const eduInstitutes = new ol.layer.Vector({
   source: new ol.source.Vector({
-      url: 'bus_stop.geojson',
+      url: 'http://localhost:3000/educationalInstitutes',
       format: new ol.format.GeoJSON()
   }),
   visible: false,
-  title: 'goverment offices',
+  title: 'educational Institutes',
   style: function(feature) {
       if (feature.getGeometry().getType() === 'Point') {
           return new ol.style.Style({
@@ -449,11 +449,11 @@ const eduInstitutes = new ol.layer.Vector({
 map.addLayer(eduInstitutes);
 
 document.getElementById('educational-institutes').addEventListener('click', function() {
-  const currentVisible = busStop.getVisible();
-  busStop.setVisible(!currentVisible);
+  const currentVisible = eduInstitutes.getVisible();
+  eduInstitutes.setVisible(!currentVisible);
 
   const lucknowCenter = ol.proj.fromLonLat([80.9462, 26.8505]); // Center of Lucknow
-  const lucknowZoom = 14; // Desired zoom level for Lucknow
+  const lucknowZoom = 12; // Desired zoom level for Lucknow
 
   // Adjust the map view
   map.getView().animate({
@@ -465,11 +465,11 @@ document.getElementById('educational-institutes').addEventListener('click', func
 });
 const bankAtm= new ol.layer.Vector({
   source: new ol.source.Vector({
-      url: 'bus_stop.geojson',
+      url: 'http://localhost:3000/bank&Atm',
       format: new ol.format.GeoJSON()
   }),
   visible: false,
-  title: 'goverment offices',
+  title: 'bank Atm',
   style: function(feature) {
       if (feature.getGeometry().getType() === 'Point') {
           return new ol.style.Style({
@@ -496,11 +496,11 @@ const bankAtm= new ol.layer.Vector({
 map.addLayer(bankAtm);
 
 document.getElementById('bank-atm').addEventListener('click', function() {
-  const currentVisible = busStop.getVisible();
-  busStop.setVisible(!currentVisible);
+  const currentVisible = bankAtm.getVisible();
+  bankAtm.setVisible(!currentVisible);
 
   const lucknowCenter = ol.proj.fromLonLat([80.9462, 26.8505]); // Center of Lucknow
-  const lucknowZoom = 14; // Desired zoom level for Lucknow
+  const lucknowZoom = 12; // Desired zoom level for Lucknow
 
   // Adjust the map view
   map.getView().animate({
@@ -512,16 +512,16 @@ document.getElementById('bank-atm').addEventListener('click', function() {
 });
 const petrolPump= new ol.layer.Vector({
   source: new ol.source.Vector({
-      url: 'bus_stop.geojson',
+      url: 'http://localhost:3000/petrolpump',
       format: new ol.format.GeoJSON()
   }),
   visible: false,
-  title: 'goverment offices',
+  title: 'petrol pump',
   style: function(feature) {
       if (feature.getGeometry().getType() === 'Point') {
           return new ol.style.Style({
               image: new ol.style.Icon({
-                  src: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="blue" /></svg>',
+                  src: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="red" /></svg>',
                   scale: 1.0
               }),
               text: new ol.style.Text({
@@ -543,11 +543,11 @@ const petrolPump= new ol.layer.Vector({
 map.addLayer(petrolPump);
 
 document.getElementById('petrol-pump').addEventListener('click', function() {
-  const currentVisible = busStop.getVisible();
-  busStop.setVisible(!currentVisible);
+  const currentVisible = petrolPump.getVisible();
+  petrolPump.setVisible(!currentVisible);
 
   const lucknowCenter = ol.proj.fromLonLat([80.9462, 26.8505]); // Center of Lucknow
-  const lucknowZoom = 14; // Desired zoom level for Lucknow
+  const lucknowZoom = 12; // Desired zoom level for Lucknow
 
   // Adjust the map view
   map.getView().animate({
