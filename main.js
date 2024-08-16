@@ -148,7 +148,7 @@ map.addLayer(worldCountriesLayer);
 // india all states layer
 const indiaStatesLayer = new ol.layer.Vector({
   source: new ol.source.Vector({
-      url: 'india_state.geojson',
+      url: 'map_data/india_state.geojson',
       format: new ol.format.GeoJSON(),
       attributions: 'India States GeoJSON'
   }),
@@ -160,7 +160,7 @@ map.addLayer(indiaStatesLayer);
 // all district layer
 const indiaDistrictsLayer = new ol.layer.Vector({
   source: new ol.source.Vector({
-      url: 'india_district.geojson',
+      url: 'map_data/india_district.geojson',
       format: new ol.format.GeoJSON(),
       attributions: 'India Districts GeoJSON'
   }),
@@ -175,7 +175,7 @@ map.addLayer(indiaDistrictsLayer);
 // all national park layer
 const allNationalParks = new ol.layer.Vector({
   source: new ol.source.Vector({
-      url: 'map (1).geojson',
+      url: 'map_data/map (1).geojson',
       format: new ol.format.GeoJSON()
   }),
   visible: false,
@@ -214,9 +214,11 @@ document.getElementById('countrylayer').addEventListener('click', function() {
 document.getElementById('statelayer').addEventListener('click', function() {
   const currentVisible = indiaStatesLayer.getVisible();
   indiaStatesLayer.setVisible(!currentVisible);
+  
+ 
 });
 document.getElementById('districtlayer').addEventListener('click', function() {
-  const currentVisible = indiaDistrictsLayer.getVisible();
+   const currentVisible = indiaDistrictsLayer.getVisible();
   indiaDistrictsLayer.setVisible(!currentVisible);
 });
 document.getElementById('parklayer').addEventListener('click', function() {
@@ -260,6 +262,7 @@ map.addLayer(allParks);
 document.getElementById('parks').addEventListener('click', function() {
   const currentVisible = allParks.getVisible();
   allParks.setVisible(!currentVisible);
+map.addLayer(allParks);
 
   const lucknowCenter = ol.proj.fromLonLat([80.9462, 26.8505]); // Center of Lucknow
   const lucknowZoom = 12; // Desired zoom level for Lucknow

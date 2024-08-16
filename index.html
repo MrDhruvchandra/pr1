@@ -1210,6 +1210,11 @@
       sidebar.classList.toggle('hidden');
       map.classList.toggle('expanded');
 
+      document.getElementById("measure-box").style.display = 'none';
+      document.getElementById("query-box").style.display = 'none';
+      document.getElementById("layer-box").style.display = 'none';
+
+
 
       const toggleIcon = document.getElementById('toggle-icon');
 
@@ -1257,15 +1262,6 @@
 
 
 
-    //  table button  js code start here
-    // document.getElementById('show-table').addEventListener('click', function () {
-    //   const tableContainer = document.getElementById('table-container');
-    //   if (tableContainer.style.display === 'none' || tableContainer.style.display === '') {
-    //     tableContainer.style.display = 'block';
-    //   } else {
-    //     tableContainer.style.display = 'none';
-    //   }
-    // });
 
 
     //  table button  js code end here
@@ -1278,6 +1274,12 @@
         document.getElementById("search-input").style.display = "block";
         document.getElementById("search-input-div").style.display = "block";
         document.getElementById("search-input-div").style.display = "flex";
+        document.getElementById("measure-box").style.display = 'none';
+        document.getElementById("query-box").style.display = 'none';
+        document.getElementById("layer-box").style.display = 'none';
+
+
+
       }
       else {
         document.getElementById("search-input").style.display = "none";
@@ -1290,6 +1292,12 @@
     function measureClick() {
       if (document.getElementById("measure-box").style.display == 'none') {
         document.getElementById("measure-box").style.display = "block";
+        document.getElementById("query-box").style.display = 'none';
+        document.getElementById("layer-box").style.display = 'none';
+        document.getElementById("map-layer-div").style.display = 'none';
+
+
+
       }
       else {
         document.getElementById("measure-box").style.display = 'none';
@@ -1300,6 +1308,12 @@
     function queryClick() {
       if (document.getElementById("query-box").style.display === 'none') {
         document.getElementById("query-box").style.display = "block";
+        document.getElementById("measure-box").style.display = 'none';
+        document.getElementById("layer-box").style.display = 'none';
+        document.getElementById("map-layer-div").style.display = 'none';
+
+
+
       }
       else {
         document.getElementById("query-box").style.display = 'none';
@@ -1310,6 +1324,12 @@
     function listClick() {
       if (document.getElementById("layer-box").style.display === 'none') {
         document.getElementById("layer-box").style.display = "block";
+        document.getElementById("measure-box").style.display = 'none';
+        document.getElementById("query-box").style.display = 'none';
+        document.getElementById("map-layer-div").style.display = 'none';
+
+
+
       }
       else {
         document.getElementById("layer-box").style.display = 'none';
@@ -1320,6 +1340,13 @@
     function layerClick() {
       if (document.getElementById("map-layer-div").style.display === 'none') {
         document.getElementById("map-layer-div").style.display = "block";
+        document.getElementById("measure-box").style.display = 'none';
+        document.getElementById("query-box").style.display = 'none';
+        document.getElementById("layer-box").style.display = 'none';
+        document.getElementById("place-map-layer-div").style.display = 'none';
+
+
+
       }
       else {
         document.getElementById("map-layer-div").style.display = 'none';
@@ -1330,6 +1357,13 @@
     function placeLayerClick() {
       if (document.getElementById("place-map-layer-div").style.display === 'none') {
         document.getElementById("place-map-layer-div").style.display = "block";
+        document.getElementById("measure-box").style.display = 'none';
+        document.getElementById("query-box").style.display = 'none';
+        document.getElementById("layer-box").style.display = 'none';
+        document.getElementById("map-layer-div").style.display = 'none';
+
+
+
       }
       else {
         document.getElementById("place-map-layer-div").style.display = 'none';
